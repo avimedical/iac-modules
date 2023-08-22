@@ -5,11 +5,13 @@ variable "availability_zone" { default = null }
 variable "admin_pass" { default = null }
 variable "subnet_id" {}
 variable "user_data" { default = null }
-variable "key_pair_name" {}
+variable "key_pair" {}
 variable "delete_on_termination" {
   default = true
 }
-variable "security_groups" {}
+variable "additional_security_group" {
+  default = null
+}
 variable "ecs_volume_size" {}
 variable "ecs_volume_type" {}
 variable "tags" {}
