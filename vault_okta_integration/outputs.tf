@@ -11,5 +11,5 @@ output "path" {
 }
 
 output "accessor" {
-  value       = vault_jwt_auth_backend.okta_oidc.accessor
+  value = vault_jwt_auth_backend.okta_oidc.accessor
 }

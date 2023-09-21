@@ -10,7 +10,7 @@ variable "okta_discovery_url" {
 }
 
 variable "okta_allowed_groups" {
-  type        = list
+  type        = list(any)
   description = "Okta group for Vault admins"
   default     = ["vault_admins"]
 }
@@ -32,7 +32,7 @@ variable "okta_client_secret" {
 }
 
 variable "okta_bound_audiences" {
-  type        = list
+  type        = list(any)
   description = "A list of allowed token audiences"
 }
 
@@ -61,7 +61,7 @@ variable "okta_token_type" {
 }
 
 variable "roles" {
-  type    = map
+  type    = map(any)
   default = {}
 
   description = <<EOF

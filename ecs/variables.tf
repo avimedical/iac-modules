@@ -15,4 +15,20 @@ variable "additional_security_group" {
 variable "ecs_volume_size" {}
 variable "ecs_volume_type" {}
 variable "tags" {}
-
+variable "enable_internal_dns" {}
+variable "loadbalancer_setup" {
+  default = null
+  type = object({
+    enable            = bool
+    subnet_id         = string
+    pool_protocol     = string
+    pool_method       = string
+    listener_protocol = string
+    listener_port     = number
+    listener_tls_id   = string
+    members = list(object({
+      address = string
+      port = number
+    }))
+  })
+}
