@@ -28,7 +28,7 @@ variable "loadbalancer_setup" {
     listener_tls_id   = string
     members = list(object({
       address = string
-      port = number
+      port    = number
     }))
   })
 }
