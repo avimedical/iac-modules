@@ -24,12 +24,12 @@ resource "opentelekomcloud_lb_member_v2" "ecs_loadbalancer_pool_members" {
   address       = opentelekomcloud_compute_instance_v2.this.access_ip_v4
   protocol_port = 8200
   pool_id       = opentelekomcloud_lb_pool_v2.ecs_loadbalancer_pool.id
-  subnet_id     = data.opentelekomcloud_vpc_subnet_v1.private_subnet_v1.subnet_id
+  subnet_id     = var.subnet_id
 }
 
 resource "opentelekomcloud_dns_recordset_v2" "ecs_dns_private" {
   count       = var.enable_internal_dns == true ? 1 : 0
-  zone_id     = data.opentelekomcloud_dns_zone_v2.private_dns_zone.id
+  zone_id     = var.private_dns_zone_id
   name        = "${var.dns_prefix}.${var.dns_zone_name}"
   description = "${var.instance_name} private DNS record"
   ttl         = 300
