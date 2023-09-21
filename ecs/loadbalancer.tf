@@ -30,7 +30,7 @@ resource "opentelekomcloud_lb_member_v2" "ecs_loadbalancer_pool_members" {
 resource "opentelekomcloud_dns_recordset_v2" "ecs_dns_private" {
   count       = var.enable_internal_dns == true ? 1 : 0
   zone_id     = var.private_dns_zone_id
-  name        = "${var.dns_prefix}.${var.dns_zone_name}"
+  name        = var.internal_dns_record_name
   description = "${var.instance_name} private DNS record"
   ttl         = 300
   type        = "A"

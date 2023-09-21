@@ -16,9 +16,8 @@ variable "ecs_volume_size" {}
 variable "ecs_volume_type" {}
 variable "tags" {}
 variable "enable_internal_dns" {}
-variable "private_dns_zone_id" {
-
-}
+variable "private_dns_zone_id" {}
+variable "internal_dns_record_name" {}
 variable "loadbalancer_setup" {
   default = null
   type = object({
