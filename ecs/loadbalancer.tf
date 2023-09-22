@@ -3,6 +3,8 @@ resource "opentelekomcloud_lb_loadbalancer_v2" "ecs_loadbalancer" {
   count         = var.loadbalancer_setup.enable == true ? 1 : 0
   name          = "${var.instance_name}-elb"
   vip_subnet_id = var.loadbalancer_setup.subnet_id
+
+  depends_on = [ opentelekomcloud_compute_instance_v2.this ]
 }
 
 resource "opentelekomcloud_lb_listener_v2" "ecs_loadbalancer_listener" {
@@ -11,6 +13,8 @@ resource "opentelekomcloud_lb_listener_v2" "ecs_loadbalancer_listener" {
   protocol                  = var.loadbalancer_setup.listener_protocol
   protocol_port             = var.loadbalancer_setup.listener_port
   default_tls_container_ref = var.loadbalancer_setup.listener_tls_id
+
+  depends_on = [ opentelekomcloud_lb_loadbalancer_v2.ecs_loadbalancer ]
 }
 
 resource "opentelekomcloud_lb_pool_v2" "ecs_loadbalancer_pool" {
@@ -18,6 +22,8 @@ resource "opentelekomcloud_lb_pool_v2" "ecs_loadbalancer_pool" {
   protocol    = var.loadbalancer_setup.pool_protocol
   listener_id = opentelekomcloud_lb_listener_v2.ecs_loadbalancer_listener.id
   lb_method   = var.loadbalancer_setup.pool_method
+
+  depends_on = [ opentelekomcloud_lb_listener_v2.ecs_loadbalancer_listener ]
 }
 
 resource "opentelekomcloud_lb_member_v2" "ecs_loadbalancer_pool_members" {
@@ -25,6 +31,8 @@ resource "opentelekomcloud_lb_member_v2" "ecs_loadbalancer_pool_members" {
   protocol_port = 8200
   pool_id       = opentelekomcloud_lb_pool_v2.ecs_loadbalancer_pool.id
   subnet_id     = var.subnet_id
+
+  depends_on = [ opentelekomcloud_lb_pool_v2.ecs_loadbalancer_pool ]
 }
 
 resource "opentelekomcloud_dns_recordset_v2" "ecs_dns_private" {
@@ -35,4 +43,6 @@ resource "opentelekomcloud_dns_recordset_v2" "ecs_dns_private" {
   ttl         = 300
   type        = "A"
   records     = var.loadbalancer_setup.enable == true ? [opentelekomcloud_lb_loadbalancer_v2.ecs_loadbalancer[0].vip_address] : [opentelekomcloud_compute_instance_v2.this.access_ip_v4]
+
+  depends_on = [ opentelekomcloud_lb_listener_v2.ecs_loadbalancer_listener ]
 }
