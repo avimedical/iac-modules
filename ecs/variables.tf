@@ -28,7 +28,7 @@ variable "loadbalancer_setup" {
     listener_protocol = string
     listener_port     = number
     listener_tls_id   = string
-    members = list(object({
+    members = map(object({
       address = string
       port    = number
       subnet_id = string
