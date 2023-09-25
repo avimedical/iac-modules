@@ -32,12 +32,13 @@ resource "opentelekomcloud_lb_pool_v2" "ecs_loadbalancer_pool" {
 }
 
 resource "opentelekomcloud_lb_member_v2" "ecs_loadbalancer_pool_members" {
-    count         = var.loadbalancer_setup.enable == true ? 1 : 0
-
-  address       = opentelekomcloud_compute_instance_v2.this.access_ip_v4
-  protocol_port = 8200
+  
+  for_each = var.loadbalancer_setup.enable == true ? var.loadbalancer_setup.members : {}
+  
+  address       = each.value.address
+  protocol_port = each.value.port
   pool_id       = opentelekomcloud_lb_pool_v2.ecs_loadbalancer_pool[0].id
-  subnet_id     = var.subnet_id
+  subnet_id     = each.value.subnet_id
 
   depends_on = [ opentelekomcloud_lb_pool_v2.ecs_loadbalancer_pool[0] ]
 }

@@ -31,6 +31,7 @@ variable "loadbalancer_setup" {
     members = list(object({
       address = string
       port    = number
+      subnet_id = string
     }))
   })
 }
