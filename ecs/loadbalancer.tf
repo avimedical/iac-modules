@@ -10,7 +10,6 @@ resource "opentelekomcloud_lb_loadbalancer_v2" "ecs_loadbalancer" {
 resource "opentelekomcloud_lb_listener_v2" "ecs_loadbalancer_listener" {
   
   count         = var.loadbalancer_setup.enable == true ? 1 : 0
-
   name                      = "${var.instance_name}-listener"
   loadbalancer_id           = opentelekomcloud_lb_loadbalancer_v2.ecs_loadbalancer[0].id
   protocol                  = var.loadbalancer_setup.listener_protocol
@@ -21,8 +20,7 @@ resource "opentelekomcloud_lb_listener_v2" "ecs_loadbalancer_listener" {
 }
 
 resource "opentelekomcloud_lb_pool_v2" "ecs_loadbalancer_pool" {
-    count         = var.loadbalancer_setup.enable == true ? 1 : 0
-
+  count         = var.loadbalancer_setup.enable == true ? 1 : 0
   name        = "${var.instance_name}-pool"
   protocol    = var.loadbalancer_setup.pool_protocol
   listener_id = opentelekomcloud_lb_listener_v2.ecs_loadbalancer_listener[0].id
@@ -34,7 +32,7 @@ resource "opentelekomcloud_lb_pool_v2" "ecs_loadbalancer_pool" {
 resource "opentelekomcloud_lb_member_v2" "ecs_loadbalancer_pool_members" {
   
   for_each = var.loadbalancer_setup.enable == true ? var.loadbalancer_setup.members : {}
-  
+
   address       = each.value.address
   protocol_port = each.value.port
   pool_id       = opentelekomcloud_lb_pool_v2.ecs_loadbalancer_pool[0].id
