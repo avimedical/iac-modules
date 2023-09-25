@@ -3,6 +3,5 @@ output "network_ipv4" {
 }
 
 output "loadbalancer_id" {
-  count         = var.loadbalancer_setup.enable == true ? 1 : 0
-  value = opentelekomcloud_lb_loadbalancer_v2.ecs_loadbalancer[0].vip_port_id
+  value = var.loadbalancer_setup.enable == true ? opentelekomcloud_lb_loadbalancer_v2.ecs_loadbalancer[0].vip_port_id : null
 }
