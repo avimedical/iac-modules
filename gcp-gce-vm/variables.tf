@@ -50,3 +50,27 @@ variable "service_account" {
   })
   description = "Service account to attach to the instance. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#service_account."
 }
+
+variable "source_image" {
+  description = "Source disk image. If neither source_image nor source_image_family is specified, defaults to the latest public CentOS image."
+  type        = string
+  default     = ""
+}
+
+variable "disk_encryption_key" {
+  description = "The id of the encryption key that is stored in Google Cloud KMS to use to encrypt all the disks on this instance"
+  type        = string
+  default     = null
+}
+
+variable "machine_type" {
+  description = "Machine type to create, e.g. n1-standard-1"
+  type        = string
+  default     = "n1-standard-1"
+}
+
+variable "automatic_restart" {
+  type        = bool
+  description = "(Optional) Specifies whether the instance should be automatically restarted if it is terminated by Compute Engine (not terminated by a user)."
+  default     = true
+}

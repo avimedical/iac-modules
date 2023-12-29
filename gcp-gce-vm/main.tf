@@ -1,3 +1,5 @@
+
+
 module "instance_template" {
   source  = "terraform-google-modules/vm/google//modules/instance_template"
   version = "~> 10.0"
@@ -6,6 +8,10 @@ module "instance_template" {
   project_id      = var.project_id
   subnetwork      = var.subnetwork
   service_account = var.service_account
+  disk_encryption_key = var.disk_encryption_key
+  machine_type	= var.machine_type
+  source_image	= var.source_image
+  automatic_restart	= var.automatic_restart
 }
 
 module "compute_instance" {
