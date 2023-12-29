@@ -57,6 +57,12 @@ variable "source_image" {
   default     = ""
 }
 
+variable "source_image_family" {
+  description = "Source disk image family. If neither source_image nor source_image_family is specified, defaults to the latest public CentOS image."
+  type        = string
+  default     = "avimedical"
+}
+
 variable "disk_encryption_key" {
   description = "The id of the encryption key that is stored in Google Cloud KMS to use to encrypt all the disks on this instance"
   type        = string
