@@ -11,6 +11,8 @@ module "instance_template" {
   disk_encryption_key = var.disk_encryption_key
   machine_type	= var.machine_type
   source_image	= var.source_image
+  source_image_family	= ""
+  source_image_project = ""
   automatic_restart	= var.automatic_restart
 }
 
