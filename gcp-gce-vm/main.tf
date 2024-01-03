@@ -1,9 +1,14 @@
 
+provider "google" {
+  project = var.project_id
+  region  = var.region
+}
 
 module "instance_template" {
   source  = "terraform-google-modules/vm/google//modules/instance_template"
   version = "~> 10.0"
 
+  name_prefix     = var.name_prefix
   region          = var.region
   project_id      = var.project_id
   subnetwork      = var.subnetwork
@@ -14,6 +19,7 @@ module "instance_template" {
   source_image_family	= var.source_image_family
   source_image_project = var.project_id
   automatic_restart	= var.automatic_restart
+  tags = var.tags
 }
 
 module "compute_instance" {
@@ -32,4 +38,5 @@ module "compute_instance" {
     nat_ip       = var.nat_ip
     network_tier = var.network_tier
   }, ]
+  tags = var.tags
 }

@@ -3,6 +3,12 @@ variable "project_id" {
   type        = string
 }
 
+variable "name_prefix" {
+  description = "Name prefix for the instance template"
+  type        = string
+  default     = "default-instance-template"
+}
+
 variable "region" {
   description = "The GCP region to create and test resources in"
   type        = string
@@ -79,4 +85,10 @@ variable "automatic_restart" {
   type        = bool
   description = "(Optional) Specifies whether the instance should be automatically restarted if it is terminated by Compute Engine (not terminated by a user)."
   default     = true
+}
+
+variable "tags" {
+  type        = list(string)
+  description = "Network tags, provided as a list"
+  default     = []
 }
