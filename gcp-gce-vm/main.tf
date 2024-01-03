@@ -38,5 +38,4 @@ module "compute_instance" {
     nat_ip       = var.nat_ip
     network_tier = var.network_tier
   }, ]
-  tags = var.tags
 }
