@@ -5,7 +5,7 @@ resource "google_compute_target_pool" "target_pool" {
   instances = var.instances
 
   health_checks = [
-    google_compute_health_check.health_check.name,
+    google_compute_http_health_check.health_check.name,
   ]
 }
 
@@ -18,11 +18,10 @@ resource "google_compute_forwarding_rule" "forwarding_rule" {
   port_range            = var.target_port
 }
 
-resource "google_compute_health_check" "health_check" {
+resource "google_compute_http_health_check" "health_check" {
   name               = "${var.name}-health-check"
+  request_path       = "/"
   check_interval_sec = 1
   timeout_sec        = 1
-  tcp_health_check {
-    port = var.target_port
-  }
+  port               = var.target_port
 }
