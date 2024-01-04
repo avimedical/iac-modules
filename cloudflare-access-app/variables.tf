@@ -19,3 +19,8 @@ variable "allowed_idps" {
   description = "The allowed idps of the application"
   type        = list(string)
 }
+
+variable "allowed_groupids" {
+  description = "The allowed groups for the application"
+  type        = list(string)
+}
