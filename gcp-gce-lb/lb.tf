@@ -3,7 +3,7 @@ resource "google_compute_target_pool" "target_pool" {
   name      = var.name + "-target-pool"
   region    = var.region
   instances = var.instances
-  
+
   health_checks = [
     google_compute_http_health_check.health_check.name,
   ]
@@ -19,7 +19,6 @@ resource "google_compute_forwarding_rule" "forwarding_rule" {
 }
 
 resource "google_compute_health_check" "health_check" {
-  count              = var.enable_health_check ? 1 : 0
   name               = var.name + "-health-check"
   check_interval_sec = 1
   timeout_sec        = 1

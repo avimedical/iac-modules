@@ -26,10 +26,3 @@ variable "target_port" {
   default     = 80
 }
 
-variable "enable_health_check" {
-  description = "Enable health check"
-  type        = bool
-  default     = true
-}
-
-
