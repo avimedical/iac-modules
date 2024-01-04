@@ -13,6 +13,7 @@ variable "domain" {
 variable "type" {
   description = "The type of the application"
   type        = string
+  default     = "A"
   }
 variable "allowed_idps" {
   description = "The allowed idps of the application"
