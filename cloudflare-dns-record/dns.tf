@@ -5,5 +5,4 @@ resource "cloudflare_record" "cf_dns_record" {
   type    = "A"
   allow_overwrite = true
   ttl     = 300
-  tags = var.tags
 }

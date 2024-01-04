@@ -19,8 +19,3 @@ variable "allowed_idps" {
   description = "The allowed idps of the application"
   type        = list(string)
 }
-
-variable "tags" {
-  description = "The tags of the application"
-  type        = list(string)
-  }    
