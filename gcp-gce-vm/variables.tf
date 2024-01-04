@@ -26,7 +26,7 @@ variable "hostname" {
 }
 
 variable "deletion_protection" {
-  type = bool
+  type    = bool
   default = false
 }
 
