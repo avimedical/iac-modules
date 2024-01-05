@@ -27,12 +27,20 @@ resource "google_compute_backend_service" "backend_service" {
   port_name   = "http"
   protocol    = "HTTP"
   timeout_sec = 30
+  health_checks = [google_compute_http_health_check.default.id]
 
   backend {
     group           = google_compute_network_endpoint_group.endpoint_group.id
     balancing_mode  = "UTILIZATION"
     max_utilization = 0.8
   }
+}
+
+resource "google_compute_http_health_check" "default" {
+  name               = "health-check"
+  request_path       = "/"
+  check_interval_sec = 1
+  timeout_sec        = 1
 }
 
 resource "google_compute_network_endpoint_group" "endpoint_group" {
