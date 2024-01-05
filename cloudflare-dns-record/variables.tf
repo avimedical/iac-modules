@@ -6,7 +6,7 @@ variable "zone_id" {
 variable "name" {
   description = "The name of the application"
   type        = string
-}   
+}
 
 variable "value" {
   description = "The value of the dns record"

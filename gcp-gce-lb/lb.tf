@@ -16,21 +16,14 @@ resource "google_compute_target_https_proxy" "https_proxy" {
 }
 
 resource "google_compute_url_map" "url_map" {
-  name        = "${var.name}-url-map"
-  description = "URL proxy map for : ${var.name}"
+  name            = "${var.name}-url-map"
+  description     = "URL proxy map for : ${var.name}"
   default_service = google_compute_backend_service.backend_service.id
 }
 
 
-resource "google_compute_global_forwarding_rule" "https_forwarding_rule" {
-  name       = "${var.name}-https-forwarding-rule"
-  target     = google_compute_target_https_proxy.https_proxy.id
-  port_range = "443"  # HTTPS Load Balancer port
-  load_balancing_scheme = var.load_balancing_scheme
-}
-
 resource "google_compute_backend_service" "backend_service" {
-  name        = "${var.name}-backend-service" 
+  name        = "${var.name}-backend-service"
   port_name   = "http"
   protocol    = "HTTP"
   timeout_sec = 30
@@ -43,18 +36,26 @@ resource "google_compute_backend_service" "backend_service" {
 }
 
 resource "google_compute_network_endpoint_group" "endpoint_group" {
-  name        = "${var.name}-endpoint-group"
-  network     = var.network
-  subnetwork = var.subnetwork
-  default_port = var.target_port
-  zone         = var.zone
+  name                  = "${var.name}-endpoint-group"
+  network               = var.network
+  subnetwork            = var.subnetwork
+  default_port          = var.target_port
+  zone                  = var.zone
   network_endpoint_type = "GCE_VM_IP_PORT"
 }
 
 resource "google_compute_network_endpoint" "endpoint" {
   network_endpoint_group = google_compute_network_endpoint_group.endpoint_group.name
-  instance  = var.instance_name
-  zone      = var.zone
-  port = var.target_port
-  ip_address = var.target_ip
+  instance               = var.instance_name
+  zone                   = var.zone
+  port                   = var.target_port
+  ip_address             = var.target_ip
+}
+
+
+resource "google_compute_global_forwarding_rule" "https_forwarding_rule" {
+  name                  = "${var.name}-https-forwarding-rule"
+  target                = google_compute_target_https_proxy.https_proxy.id
+  port_range            = "443" # HTTPS Load Balancer port
+  load_balancing_scheme = var.load_balancing_scheme
 }
