@@ -53,6 +53,7 @@ resource "google_compute_network_endpoint_group" "endpoint_group" {
 
 resource "google_compute_network_endpoint" "endpoint" {
   network_endpoint_group = google_compute_network_endpoint_group.endpoint_group.name
+  instance  = var.instance_name
   port = var.target_port
   ip_address = var.target_ip
 }

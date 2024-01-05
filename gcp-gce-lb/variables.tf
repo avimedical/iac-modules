@@ -29,6 +29,11 @@ variable "subnetwork" {
   description = "The subnetwork selflink to host the compute instances in"
 }
 
+variable "instance_name" {
+  description = "Name of the instance"
+  type        = string
+}
+
 variable "target_ip" {
   description = "target IP"
   type        = string
