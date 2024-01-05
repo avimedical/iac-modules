@@ -7,3 +7,8 @@ output "available_zones" {
   description = "List of available zones in region"
   value       = module.compute_instance.available_zones
 }
+
+output "instances_details" {
+  description = "IP address of the instance"
+  value       = module.compute_instance.instances_details
+}
