@@ -5,27 +5,27 @@ variable "zone_id" {
 
 variable "enable_geoblocking" {
   description = "Enable geoblocking"
-  default = true
+  default     = true
 }
 
 variable "enable_waf_managed_ruleset" {
   description = "Enable WAF managed ruleset"
-  default = true
+  default     = true
 }
 
 variable "geoblock_allow_expression" {
   description = "The expression to allow traffic from"
-  default = false
+  default     = false
 }
 
 variable "geoblock_block_expression" {
   description = "The expression to block traffic from"
-  default = false
+  default     = false
 
 }
 variable "geoblock_manage_challenge_expression" {
   description = "The expression to manage challenge traffic from"
-  default = false
+  default     = false
 }
 
 variable "ratelimit_config" {
