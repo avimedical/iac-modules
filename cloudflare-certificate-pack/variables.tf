@@ -13,7 +13,7 @@ variable "hosts" {
 variable "certificate_authority" {
   description = "The certificate authority to use"
   type        = string
-  default     = "digicert"
+  default     = "google"
 }
 
 variable "validity_days" {
