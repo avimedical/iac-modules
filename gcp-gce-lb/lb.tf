@@ -31,8 +31,6 @@ resource "google_compute_backend_service" "backend_service" {
 
   backend {
     group           = google_compute_network_endpoint_group.endpoint_group.id
-    balancing_mode  = "UTILIZATION"
-    max_utilization = 0.8
   }
 }
 
