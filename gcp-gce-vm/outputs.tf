@@ -8,7 +8,7 @@ output "available_zones" {
   value       = module.compute_instance.available_zones
 }
 
-outout "instances_details" {
+output "instances_details" {
   description = "IP address of the instance"
   value       = module.compute_instance.instances_details
 }
