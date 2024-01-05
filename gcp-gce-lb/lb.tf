@@ -23,10 +23,15 @@ resource "google_compute_url_map" "url_map" {
 
 
 resource "google_compute_backend_service" "backend_service" {
-  name        = "${var.name}-backend-service"
-  port_name   = "http"
-  protocol    = "HTTP"
-  timeout_sec = 30
+  provider = google-beta
+  
+  name                            = "${var.name}-backend-service"
+  enable_cdn                      = true
+  timeout_sec                     = 10
+  connection_draining_timeout_sec = 10
+
+  custom_request_headers          = ["host: ${google_compute_global_network_endpoint.proxy.fqdn}"]
+  custom_response_headers         = ["X-Cache-Hit: {cdn_cache_status}"]
 
   backend {
     group           = google_compute_network_endpoint_group.endpoint_group.id
