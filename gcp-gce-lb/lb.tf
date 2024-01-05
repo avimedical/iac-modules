@@ -40,7 +40,7 @@ resource "google_compute_backend_service" "backend_service" {
 resource "google_compute_health_check" "health_check" {
   name = "health-check"
   http_health_check {
-    port = 8200
+    port = var.health_check_port
   }
 }
 
