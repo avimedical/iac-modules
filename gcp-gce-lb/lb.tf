@@ -27,11 +27,19 @@ resource "google_compute_backend_service" "backend_service" {
   enable_cdn                      = true
   timeout_sec                     = 10
   connection_draining_timeout_sec = 10
+  health_checks                   = [google_compute_health_check.health_check.id]
 
   backend {
     group           = google_compute_network_endpoint_group.endpoint_group.id
     balancing_mode  = "RATE"
     max_rate        = 1000
+  }
+}
+
+resource "google_compute_health_check" "health_check" {
+  name = "health-check"
+  http_health_check {
+    port = 8200
   }
 }
 
