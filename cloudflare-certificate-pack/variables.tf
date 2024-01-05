@@ -19,5 +19,5 @@ variable "certificate_authority" {
 variable "validity_days" {
   description = "The validity of the certificate in days"
   type        = number
-  default     = 365
+  default     = 90
 }

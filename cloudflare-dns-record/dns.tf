@@ -4,6 +4,6 @@ resource "cloudflare_record" "cf_dns_record" {
   value           = var.value
   type            = "A"
   allow_overwrite = true
-  ttl             = 300
+  ttl             = 1
   proxied         = var.proxied
 }
