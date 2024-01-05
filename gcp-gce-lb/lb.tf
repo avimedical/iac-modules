@@ -34,7 +34,7 @@ resource "google_compute_backend_service" "backend_service" {
 resource "google_compute_network_endpoint_group" "endpoint_group" {
   name        = "${var.name}-endpoint-group"
   network     = var.network
-  subnetworks = var.subnetworks
+  subnetwork = var.subnetwork
   default_port = var.target_port
   zone         = var.zone
   network_endpoint_type = "GCE_VM_IP_PORT"
