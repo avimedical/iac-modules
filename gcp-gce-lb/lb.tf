@@ -23,8 +23,6 @@ resource "google_compute_url_map" "url_map" {
 
 
 resource "google_compute_backend_service" "backend_service" {
-  provider = google-beta
-
   name                            = "${var.name}-backend-service"
   enable_cdn                      = true
   timeout_sec                     = 10
