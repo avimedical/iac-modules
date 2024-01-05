@@ -4,9 +4,6 @@ resource "google_compute_ssl_certificate" "ssl_certificate" {
   private_key = var.private_key
   certificate = var.certificate
   project     = var.project_id
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 resource "google_compute_target_https_proxy" "https_proxy" {
