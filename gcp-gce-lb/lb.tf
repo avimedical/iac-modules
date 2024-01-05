@@ -27,8 +27,6 @@ resource "google_compute_global_forwarding_rule" "https_forwarding_rule" {
   target     = google_compute_target_https_proxy.https_proxy.id
   port_range = "443"  # HTTPS Load Balancer port
   load_balancing_scheme = var.load_balancing_scheme
-
-  ssl_certificates = [google_compute_ssl_certificate.ssl_certificate.self_link]
 }
 
 resource "google_compute_backend_service" "backend_service" {
