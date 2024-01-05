@@ -30,6 +30,10 @@ variable "deletion_protection" {
   default = false
 }
 
+variable "network" {
+  description = "The network selflink to host the compute instances in"
+}
+
 variable "subnetwork" {
   description = "The subnetwork selflink to host the compute instances in"
 }
