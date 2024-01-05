@@ -9,9 +9,8 @@ resource "tls_cert_request" "csr" {
     common_name  = var.common_name
     organization = "Avimedical GmbH"
     organizational_unit = "Infrastructure"
-    street_address = "Ridlerstraße 37-39"
+    street_address = ["Ridlerstraße 37-39"]
     locality = "Munich"
-    state = "Bavaria"
     country = "DE"
     postal_code = "80339"
   }
