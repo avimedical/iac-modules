@@ -12,3 +12,9 @@ variable "value" {
   description = "The value of the dns record"
   type        = string
 } 
+
+variable "proxied" {
+  description = "Whether the dns record is proxied by cloudflare"
+  type        = bool
+  default     = true
+}
