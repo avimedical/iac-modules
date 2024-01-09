@@ -26,8 +26,12 @@ variable "hostname" {
 }
 
 variable "deletion_protection" {
-  type = bool
+  type    = bool
   default = false
+}
+
+variable "network" {
+  description = "The network selflink to host the compute instances in"
 }
 
 variable "subnetwork" {
