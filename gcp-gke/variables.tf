@@ -26,11 +26,6 @@ variable "deletion_protection" {
   description = "Deletion protection"
   default     = false
 }
-
-variable "database_encryption" {
-  description = "Database encryption"
-  default     = false
-}
 variable "enable_vertical_pod_autoscaling" {
   description = "Enable vertical pod autoscaling"
   default     = false
