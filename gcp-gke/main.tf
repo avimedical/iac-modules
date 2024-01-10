@@ -20,18 +20,12 @@ module "gke" {
   remove_default_node_pool          = true
   disable_legacy_metadata_endpoints = true
   deletion_protection               = var.deletion_protection
-  cluster_autoscaling	            = var.cluster_autoscaling
+  cluster_autoscaling               = var.cluster_autoscaling
   database_encryption               = var.database_encryption
   deploy_using_private_endpoint     = true
   enable_shielded_nodes             = true
-  enable_vertical_pod_autoscaling	= var.enable_vertical_pod_autoscaling
-  
-  master_authorized_networks = [
-    {
-      cidr_block   = module.gke-network.subnets_ips[0]
-      display_name = var.cluster_name + "VPC"
-    },
-  ]
+  enable_vertical_pod_autoscaling   = var.enable_vertical_pod_autoscaling
+  config_connector                  = var.config_connector
 
   node_pools = [
     for pool_name, pool_config in var.node_pools_config : {
@@ -49,22 +43,22 @@ module "gke" {
   ]
 
   node_pools_oauth_scopes = {
-    for pool_name, pool_config in var.node_pools_config : 
-      pool_name               => pool_config.node_pools_oauth_scopes
+    for pool_name, pool_config in var.node_pools_config :
+    pool_name => pool_config.node_pools_oauth_scopes
   }
 
-    node_pools_labels = {
-        for pool_name, pool_config in var.node_pools_config : 
-        pool_name               => pool_config.node_pools_labels
-    }
+  node_pools_labels = {
+    for pool_name, pool_config in var.node_pools_config :
+    pool_name => pool_config.node_pools_labels
+  }
 
-    node_pools_metadata = {
-        for pool_name, pool_config in var.node_pools_config : 
-        pool_name               => pool_config.node_pools_metadata
-    }
+  node_pools_metadata = {
+    for pool_name, pool_config in var.node_pools_config :
+    pool_name => pool_config.node_pools_metadata
+  }
 
-    node_pools_tags = {
-        for pool_name, pool_config in var.node_pools_config : 
-        pool_name               => pool_config.node_pools_tags
-    }
+  node_pools_tags = {
+    for pool_name, pool_config in var.node_pools_config :
+    pool_name => pool_config.node_pools_tags
+  }
 }
