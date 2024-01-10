@@ -93,23 +93,6 @@ variable "node_pools_config" {
     node_pools_tags         = list(string)
     # Add more keys as needed
   }))
-  default = {
-    my_node_pool = {
-      name               = "my-node-pool"
-      machine_type       = "n1-standard-1"
-      min_count          = 1
-      max_count          = 1
-      disk_size_gb       = 100
-      disk_type          = "pd-ssd"
-      auto_repair        = true
-      auto_upgrade       = false
-      preemptible        = false
-      initial_node_count = 1
-      additional_key1    = "value1"
-      additional_key2    = "value2"
-    }
-    # Add more entries as needed
-  }
 }
 
 variable "config_connector" {
