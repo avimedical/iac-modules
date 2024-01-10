@@ -89,18 +89,3 @@ output "service_account" {
   description = "The service account to default running nodes as if not overridden in `node_pools`."
   value       = module.gke.service_account
 }
-
-output "network_module" {
-  description = "network module output"
-  value       = module.gke-network
-}
-
-output "subnets_ips" {
-  description = "The IP and cidrs of the subnets being created"
-  value       = module.gke-network.subnets_ips
-}
-
-output "subnets_secondary_ranges" {
-  description = "The secondary ranges associated with these subnets"
-  value       = module.gke-network.subnets_secondary_ranges
-}
