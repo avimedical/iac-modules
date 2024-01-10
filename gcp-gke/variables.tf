@@ -1,37 +1,37 @@
-varible "project_id" {
+variable "project_id" {
   description = "Project ID"
 }
-varible "cluster_name" {
+variable "cluster_name" {
   description = "Cluster name"
 }
-varible "region" {
+variable "region" {
   description = "Region"
 }
-varible "network_name" {
+variable "network_name" {
   description = "Network name"
 }
-varible "subnetwork_name" {
+variable "subnetwork_name" {
   description = "Subnetwork name"
 }
-varible "ip_range_pods" {
+variable "ip_range_pods" {
   description = "IP range pods"
 }
-varible "ip_range_services" {
+variable "ip_range_services" {
   description = "IP range services"
 }
-varible "master_ipv4_cidr_block" {
+variable "master_ipv4_cidr_block" {
   description = "Master ipv4 cidr block"
 }
-varible "deletion_protection" {
+variable "deletion_protection" {
   description = "Deletion protection"
   default     = false
 }
 
-varible "database_encryption" {
+variable "database_encryption" {
   description = "Database encryption"
   default     = false
 }
-varible "enable_vertical_pod_autoscaling" {
+variable "enable_vertical_pod_autoscaling" {
   description = "Enable vertical pod autoscaling"
   default     = false
 }
