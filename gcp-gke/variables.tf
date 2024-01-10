@@ -86,11 +86,11 @@ variable "node_pools_config" {
       total_max_count = number
       location_policy = string
     }))
-    node_pools_taints       = map(list(object({ key = string, value = string, effect = string })))
-    node_pools_oauth_scopes = map(list(string))
-    node_pools_labels       = map(map(string))
-    node_pools_metadata     = map(map(string))
-    node_pools_tags         = map(list(string))
+    node_pools_taints       = list(object({ key = string, value = string, effect = string }))
+    node_pools_oauth_scopes = list(string)
+    node_pools_labels       = map(string)
+    node_pools_metadata     = map(string)
+    node_pools_tags         = list(string)
     # Add more keys as needed
   }))
   default = {
