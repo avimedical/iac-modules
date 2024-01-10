@@ -20,7 +20,7 @@ module "gke" {
   remove_default_node_pool          = true
   disable_legacy_metadata_endpoints = true
   deletion_protection               = var.deletion_protection
-  cluster_autoscaling               = var.cluster_autoscaling
+  # cluster_autoscaling               = var.cluster_autoscaling
   database_encryption               = var.database_encryption
   deploy_using_private_endpoint     = true
   enable_shielded_nodes             = true
@@ -39,6 +39,9 @@ module "gke" {
       auto_upgrade       = pool_config.auto_upgrade
       preemptible        = pool_config.preemptible
       initial_node_count = pool_config.initial_node_count
+      auto_repair        = pool_config.auto_repair
+      auto_upgrade       = pool_config.auto_upgrade
+      autoscaling        = pool_config.autoscaling
     }
   ]
 
