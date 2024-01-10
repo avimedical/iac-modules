@@ -81,7 +81,7 @@ variable "node_pools_config" {
     autoscaling             = optional(object({
       enabled       = bool
       min_count = number
-      min_count = number
+      max_count = number
     }))
     node_pools_taints       = list(object({ key = string, value = string, effect = string }))
     node_pools_oauth_scopes = list(string)
