@@ -62,29 +62,31 @@ variable "enable_vertical_pod_autoscaling" {
 
 variable "node_pools_config" {
   description = "Node pools configuration"
-  type = list(object({
-    name                    = string
-    machine_type            = string
-    min_count               = number
-    max_count               = number
-    disk_size_gb            = number
-    disk_type               = string
-    auto_repair             = bool
-    auto_upgrade            = bool
-    preemptible             = bool
-    initial_node_count      = number
-    autoscaling             = optional(object({
-      enabled       = bool
-      min_count = number
-      max_count = number
-    }))
-    node_pools_taints       = list(object({ key = string, value = string, effect = string }))
-    node_pools_oauth_scopes = list(string)
-    node_pools_labels       = map(string)
-    node_pools_metadata     = map(string)
-    node_pools_tags         = list(string)
-    # Add more keys as needed
-  }))
+  type = list(object(any))
+  
+  # {
+  #   name                    = string
+  #   machine_type            = string
+  #   min_count               = number
+  #   max_count               = number
+  #   disk_size_gb            = number
+  #   disk_type               = string
+  #   auto_repair             = bool
+  #   auto_upgrade            = bool
+  #   preemptible             = bool
+  #   initial_node_count      = number
+  #   autoscaling             = optional(object({
+  #     enabled       = bool
+  #     min_count = number
+  #     max_count = number
+  #   }))
+  #   node_pools_taints       = list(object({ key = string, value = string, effect = string }))
+  #   node_pools_oauth_scopes = list(string)
+  #   node_pools_labels       = map(string)
+  #   node_pools_metadata     = map(string)
+  #   node_pools_tags         = list(string)
+  #   # Add more keys as needed
+  # }))
 }
 
 variable "config_connector" {
