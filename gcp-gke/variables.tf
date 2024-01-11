@@ -62,7 +62,7 @@ variable "enable_vertical_pod_autoscaling" {
 
 variable "node_pools_config" {
   description = "Node pools configuration"
-  type = list(object(any))
+  type = map(object(any))
   
   # {
   #   name                    = string
