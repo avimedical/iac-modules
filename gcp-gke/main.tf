@@ -41,23 +41,23 @@ module "gke" {
     }
   ]
 
-  node_pools_oauth_scopes = {
-    for pool_config in var.node_pools_config :
-    pool_config.name => pool_config.node_pools_oauth_scopes
-  }
+  # node_pools_oauth_scopes = {
+  #   for pool_config in var.node_pools_config :
+  #   pool_config.name => pool_config.node_pools_oauth_scopes
+  # }
 
-  node_pools_labels = {
-    for  pool_config in var.node_pools_config :
-    pool_config.name => pool_config.node_pools_labels
-  }
+  # node_pools_labels = {
+  #   for  pool_config in var.node_pools_config :
+  #   pool_config.name => pool_config.node_pools_labels
+  # }
 
-  node_pools_metadata = {
-    for  pool_config in var.node_pools_config :
-    pool_config.name => pool_config.node_pools_metadata
-  }
+  # node_pools_metadata = {
+  #   for  pool_config in var.node_pools_config :
+  #   pool_config.name => pool_config.node_pools_metadata
+  # }
 
-  node_pools_tags = {
-    for  pool_config in var.node_pools_config :
-    pool_config.name => pool_config.node_pools_tags
-  }
+  # node_pools_tags = {
+  #   for  pool_config in var.node_pools_config :
+  #   pool_config.name => pool_config.node_pools_tags
+  # }
 }
