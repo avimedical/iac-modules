@@ -26,7 +26,7 @@ module "gke" {
   config_connector                  = var.config_connector
 
   node_pools = [
-    for pool_config in var.node_pools_config : {
+    for pool_name,pool_config in var.node_pools_config : {
       name               = pool_config.name
       machine_type       = pool_config.machine_type
       min_count          = pool_config.min_count
