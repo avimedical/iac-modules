@@ -10,8 +10,8 @@ module "gke" {
   zones                             = var.zones
   network                           = var.network_name
   subnetwork                        = var.subnetwork_name
-  ip_range_pods                     = "10.0.0.0/14"
-  ip_range_services                 = "10.1.0.0/14"
+  ip_range_pods                     = "pod-ip-range"
+  ip_range_services                 = "service-ip-range"
   enable_private_endpoint           = true
   enable_private_nodes              = true
   master_ipv4_cidr_block            = "172.16.0.0/28"
