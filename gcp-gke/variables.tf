@@ -84,7 +84,15 @@ variable "node_pools_oauth_scopes" {
   description = "Map of lists containing node oauth scopes by node-pool name"
 }
 
+variable "node_pools_metadata" {
+  type        = map(map(string))
+  description = "Map of maps containing node metadata by node-pool name"
+}
 
+variable "node_pools_labels" {
+  type        = map(map(string))
+  description = "Map of maps containing node labels by node-pool name"
+}
 variable "config_connector" {
   type        = bool
   description = "Whether ConfigConnector is enabled for this cluster."
