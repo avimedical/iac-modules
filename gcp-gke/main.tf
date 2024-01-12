@@ -24,6 +24,7 @@ module "gke" {
   enable_shielded_nodes             = true
   enable_vertical_pod_autoscaling   = var.enable_vertical_pod_autoscaling
   config_connector                  = var.config_connector
+  cluster_autoscaling               = var.cluster_autoscaling
 
   node_pools = var.node_pools_config
   # node_pools_oauth_scopes = {
