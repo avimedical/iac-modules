@@ -19,9 +19,9 @@ variable "ip_range_pods" {
 variable "ip_range_services" {
   description = "IP range services"
 }
-variable "master_ipv4_cidr_block" {
-  description = "Master ipv4 cidr block"
-}
+# variable "master_ipv4_cidr_block" {
+#   description = "Master ipv4 cidr block"
+# }
 variable "deletion_protection" {
   description = "Deletion protection"
   default     = false

@@ -13,7 +13,7 @@ module "gke" {
   ip_range_services                 = var.ip_range_services
   enable_private_endpoint           = true
   enable_private_nodes              = true
-  master_ipv4_cidr_block            = var.master_ipv4_cidr_block
+  # master_ipv4_cidr_block            = var.master_ipv4_cidr_block
   network_policy                    = true
   horizontal_pod_autoscaling        = true
   service_account                   = "create"
