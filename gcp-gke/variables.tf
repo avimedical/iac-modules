@@ -7,18 +7,25 @@ variable "cluster_name" {
 variable "region" {
   description = "Region"
 }
+
+variable "zones" {
+  type        = list(string)
+  description = "The zone to host the cluster in (required if is a zonal cluster)"
+}
+
+
 variable "network_name" {
   description = "Network name"
 }
 variable "subnetwork_name" {
   description = "Subnetwork name"
 }
-variable "ip_range_pods" {
-  description = "IP range pods"
-}
-variable "ip_range_services" {
-  description = "IP range services"
-}
+# variable "ip_range_pods" {
+#   description = "IP range pods"
+# }
+# variable "ip_range_services" {
+#   description = "IP range services"
+# }
 # variable "master_ipv4_cidr_block" {
 #   description = "Master ipv4 cidr block"
 # }

@@ -6,14 +6,15 @@ module "gke" {
   project_id                        = var.project_id
   name                              = var.cluster_name
   region                            = var.region
-  regional                          = true
+  regional                          = false
+  zones                             = var.zones
   network                           = var.network_name
   subnetwork                        = var.subnetwork_name
-  ip_range_pods                     = var.ip_range_pods
-  ip_range_services                 = var.ip_range_services
+  ip_range_pods                     = data.google_compute_subnetwork.subnetwork.ip_cidr_range
+  ip_range_services                 = data.google_compute_subnetwork.subnetwork.ip_cidr_range
   enable_private_endpoint           = true
   enable_private_nodes              = true
-  # master_ipv4_cidr_block            = var.master_ipv4_cidr_block
+  master_ipv4_cidr_block            = "172.16.0.0/28"
   network_policy                    = true
   horizontal_pod_autoscaling        = true
   service_account                   = "create"
@@ -25,6 +26,12 @@ module "gke" {
   enable_vertical_pod_autoscaling   = var.enable_vertical_pod_autoscaling
   config_connector                  = var.config_connector
   cluster_autoscaling               = var.cluster_autoscaling
+  master_authorized_networks = [
+      {
+        cidr_block   = data.google_compute_subnetwork.subnetwork.ip_cidr_range
+        display_name = var.cluster_name + "VPC"
+      },
+    ]
 
   node_pools = var.node_pools_config
   node_pools_oauth_scopes = var.node_pools_oauth_scopes
