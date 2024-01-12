@@ -25,22 +25,7 @@ module "gke" {
   enable_vertical_pod_autoscaling   = var.enable_vertical_pod_autoscaling
   config_connector                  = var.config_connector
 
-  node_pools = [
-    for pool_name,pool_config in var.node_pools_config : {
-      name               = pool_config.name
-      machine_type       = pool_config.machine_type
-      min_count          = pool_config.min_count
-      max_count          = pool_config.max_count
-      disk_size_gb       = pool_config.disk_size_gb
-      disk_type          = pool_config.disk_type
-      auto_repair        = pool_config.auto_repair
-      auto_upgrade       = pool_config.auto_upgrade
-      preemptible        = pool_config.preemptible
-      initial_node_count = pool_config.initial_node_count
-      autoscaling        = pool_config.autoscaling
-    }
-  ]
-
+  node_pools = var.node_pools_config
   # node_pools_oauth_scopes = {
   #   for pool_config in var.node_pools_config :
   #   pool_config.name => pool_config.node_pools_oauth_scopes
