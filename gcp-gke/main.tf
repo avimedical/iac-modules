@@ -27,23 +27,8 @@ module "gke" {
   cluster_autoscaling               = var.cluster_autoscaling
 
   node_pools = var.node_pools_config
-  # node_pools_oauth_scopes = {
-  #   for pool_config in var.node_pools_config :
-  #   pool_config.name => pool_config.node_pools_oauth_scopes
-  # }
-
-  # node_pools_labels = {
-  #   for  pool_config in var.node_pools_config :
-  #   pool_config.name => pool_config.node_pools_labels
-  # }
-
-  # node_pools_metadata = {
-  #   for  pool_config in var.node_pools_config :
-  #   pool_config.name => pool_config.node_pools_metadata
-  # }
-
-  # node_pools_tags = {
-  #   for  pool_config in var.node_pools_config :
-  #   pool_config.name => pool_config.node_pools_tags
-  # }
+  node_pools_oauth_scopes = var.node_pools_oauth_scopes
+  node_pools_labels = var.node_pools_labels
+  node_pools_metadata = var.node_pools_metadata
+  node_pools_tags = var.node_pools_tags
 }
