@@ -20,15 +20,7 @@ variable "network_name" {
 variable "subnetwork_name" {
   description = "Subnetwork name"
 }
-# variable "ip_range_pods" {
-#   description = "IP range pods"
-# }
-# variable "ip_range_services" {
-#   description = "IP range services"
-# }
-# variable "master_ipv4_cidr_block" {
-#   description = "Master ipv4 cidr block"
-# }
+
 variable "deletion_protection" {
   description = "Deletion protection"
   default     = false
@@ -37,9 +29,6 @@ variable "enable_vertical_pod_autoscaling" {
   description = "Enable vertical pod autoscaling"
   default     = false
 }
-
-
-
 
 variable "cluster_autoscaling" {
   type = object({
