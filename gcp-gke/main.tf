@@ -34,7 +34,7 @@ module "gke" {
   master_authorized_networks = [
     {
       cidr_block   = data.google_compute_subnetwork.subnetwork.ip_cidr_range
-      display_name = "${var.cluster_name}-VPC"
+      display_name = "${var.cluster_name}-vpc"
     },
   ]
 
