@@ -33,7 +33,7 @@ module "gke" {
   # authenticator_security_group      = var.authenticator_security_group
   master_authorized_networks = [
     {
-      cidr_block   = data.google_compute_subnetwork.subnetwork.ip_cidr_range
+      cidr_block   = "0.0.0.0/0"
       display_name = "${var.cluster_name}-vpc"
     },
   ]
