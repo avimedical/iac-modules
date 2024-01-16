@@ -100,11 +100,11 @@ variable "enable_private_endpoint" {
   default     = false
 }
 
-variable "authenticator_security_group" {
-  type        = string
-  description = "The security group to use for authenticator access."
-  default     = ""
-}
+# variable "authenticator_security_group" {
+#   type        = string
+#   description = "The security group to use for authenticator access."
+#   default     = ""
+# }
 
 
 variable "deploy_using_private_endpoint" {

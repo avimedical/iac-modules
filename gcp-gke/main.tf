@@ -30,7 +30,7 @@ module "gke" {
   enable_vertical_pod_autoscaling   = var.enable_vertical_pod_autoscaling
   config_connector                  = var.config_connector
   cluster_autoscaling               = var.cluster_autoscaling
-  authenticator_security_group      = var.authenticator_security_group
+  # authenticator_security_group      = var.authenticator_security_group
   master_authorized_networks = [
     {
       cidr_block   = data.google_compute_subnetwork.subnetwork.ip_cidr_range
