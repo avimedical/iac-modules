@@ -99,3 +99,16 @@ variable "enable_private_endpoint" {
   description = "Whether to enable private endpoint on the cluster."
   default     = false
 }
+
+variable "authenticator_security_group" {
+  type        = string
+  description = "The security group to use for authenticator access."
+  default     = ""
+}
+
+
+variable "deploy_using_private_endpoint" {
+  type        = bool
+  description = "Whether to deploy using private endpoint."
+  default     = false
+}

@@ -25,11 +25,12 @@ module "gke" {
   remove_default_node_pool          = true
   disable_legacy_metadata_endpoints = true
   deletion_protection               = var.deletion_protection
-  deploy_using_private_endpoint     = true
+  deploy_using_private_endpoint     = var.deploy_using_private_endpoint
   enable_shielded_nodes             = true
   enable_vertical_pod_autoscaling   = var.enable_vertical_pod_autoscaling
   config_connector                  = var.config_connector
   cluster_autoscaling               = var.cluster_autoscaling
+  authenticator_security_group      = var.authenticator_security_group
   master_authorized_networks = [
     {
       cidr_block   = data.google_compute_subnetwork.subnetwork.ip_cidr_range
