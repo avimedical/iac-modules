@@ -16,7 +16,7 @@ module "gke" {
   //dedicated Secondary IP range for services
   ip_range_services = "service-ip-range"
 
-  enable_private_endpoint           = false
+  enable_private_endpoint           = var.enable_private_endpoint
   enable_private_nodes              = true
   master_ipv4_cidr_block            = "172.16.0.0/28"
   network_policy                    = true

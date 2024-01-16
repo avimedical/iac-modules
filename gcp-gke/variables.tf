@@ -93,3 +93,9 @@ variable "config_connector" {
   description = "Whether ConfigConnector is enabled for this cluster."
   default     = true
 }
+
+variable "enable_private_endpoint" {
+  type        = bool
+  description = "Whether to enable private endpoint on the cluster."
+  default     = false
+}
