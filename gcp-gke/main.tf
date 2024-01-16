@@ -3,20 +3,20 @@ module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
   version = "~> 29.0"
 
-  project_id                        = var.project_id
-  name                              = var.cluster_name
-  region                            = var.region
-  regional                          = false
-  zones                             = var.zones
-  network                           = var.network_name
-  subnetwork                        = var.subnetwork_name
+  project_id = var.project_id
+  name       = var.cluster_name
+  region     = var.region
+  regional   = false
+  zones      = var.zones
+  network    = var.network_name
+  subnetwork = var.subnetwork_name
 
   //dedicated Secondary IP range for pods
-  ip_range_pods                     = "pod-ip-range"
+  ip_range_pods = "pod-ip-range"
   //dedicated Secondary IP range for services
-  ip_range_services                 = "service-ip-range"
-  
-  enable_private_endpoint           = true
+  ip_range_services = "service-ip-range"
+
+  enable_private_endpoint           = false
   enable_private_nodes              = true
   master_ipv4_cidr_block            = "172.16.0.0/28"
   network_policy                    = true
@@ -31,15 +31,15 @@ module "gke" {
   config_connector                  = var.config_connector
   cluster_autoscaling               = var.cluster_autoscaling
   master_authorized_networks = [
-      {
-        cidr_block   = data.google_compute_subnetwork.subnetwork.ip_cidr_range
-        display_name = "${var.cluster_name}-VPC"
-      },
-    ]
+    {
+      cidr_block   = data.google_compute_subnetwork.subnetwork.ip_cidr_range
+      display_name = "${var.cluster_name}-VPC"
+    },
+  ]
 
-  node_pools = var.node_pools_config
+  node_pools              = var.node_pools_config
   node_pools_oauth_scopes = var.node_pools_oauth_scopes
-  node_pools_labels = var.node_pools_labels
-  node_pools_metadata = var.node_pools_metadata
-  node_pools_tags = var.node_pools_tags
+  node_pools_labels       = var.node_pools_labels
+  node_pools_metadata     = var.node_pools_metadata
+  node_pools_tags         = var.node_pools_tags
 }
