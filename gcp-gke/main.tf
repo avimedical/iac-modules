@@ -44,3 +44,21 @@ module "gke" {
   node_pools_metadata     = var.node_pools_metadata
   node_pools_tags         = var.node_pools_tags
 }
+
+# [START cloudnat_router_nat_gke]
+resource "google_compute_router" "router" {
+  project = var.project_id
+  name    = "${var.cluster_name}-router"
+  network = var.network_name
+  region  = var.region
+}
+
+module "cloud-nat" {
+  source                             = "terraform-google-modules/cloud-nat/google"
+  version                            = "~> 4.0"
+  project_id                         = var.project_id
+  region                             = var.region
+  router                             = google_compute_router.router.name
+  name                               = "${var.cluster_name}-config"
+  source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
+}
