@@ -17,8 +17,6 @@ variable "kubernetes_version" {
   description = "Kubernetes version"
   default     = "1.28.3-gke.1286000"
 }
-  
-}
 
 variable "network_name" {
   description = "Network name"
