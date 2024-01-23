@@ -22,7 +22,7 @@ module "gke" {
   master_ipv4_cidr_block            = "172.16.0.0/28"
   network_policy                    = true
   horizontal_pod_autoscaling        = true
-  service_account                   = "create"
+  # service_account                   = "create"
   remove_default_node_pool          = true
   disable_legacy_metadata_endpoints = true
   deletion_protection               = var.deletion_protection
@@ -52,6 +52,8 @@ resource "google_compute_router" "router" {
   name    = "${var.cluster_name}-router"
   network = var.network_name
   region  = var.region
+
+  depends_on = [ module.gke ]
 }
 
 module "cloud-nat" {
@@ -62,4 +64,6 @@ module "cloud-nat" {
   router                             = google_compute_router.router.name
   name                               = "${var.cluster_name}-config"
   source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
+
+  depends_on = [ module.gke ]
 }
