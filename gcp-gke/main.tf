@@ -22,16 +22,16 @@ module "gke" {
   master_ipv4_cidr_block            = "172.16.0.0/28"
   network_policy                    = true
   horizontal_pod_autoscaling        = true
+  service_account_name              = "${var.cluster_name}-svc-account"
   create_service_account            = "true"
   remove_default_node_pool          = true
-  disable_legacy_metadata_endpoints = true
+  disable_legacy_metadata_endpoints = true  
   deletion_protection               = var.deletion_protection
   deploy_using_private_endpoint     = var.deploy_using_private_endpoint
   enable_shielded_nodes             = true
   enable_vertical_pod_autoscaling   = var.enable_vertical_pod_autoscaling
   config_connector                  = var.config_connector
   cluster_autoscaling               = var.cluster_autoscaling
-  # authenticator_security_group      = var.authenticator_security_group
   master_authorized_networks = [
     {
       cidr_block   = "0.0.0.0/0"
