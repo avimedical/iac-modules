@@ -22,7 +22,7 @@ module "gke" {
   master_ipv4_cidr_block            = "172.16.0.0/28"
   network_policy                    = true
   horizontal_pod_autoscaling        = true
-  service_account_name              = "${var.cluster_name}-svc-account"
+  service_account                   = "iac-packer"
   create_service_account            = "true"
   remove_default_node_pool          = true
   disable_legacy_metadata_endpoints = true  
