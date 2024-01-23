@@ -13,6 +13,12 @@ variable "zones" {
   description = "The zone to host the cluster in (required if is a zonal cluster)"
 }
 
+variable "kubernetes_version" {
+  description = "Kubernetes version"
+  default     = "1.28.3-gke.1286000"
+}
+  
+}
 
 variable "network_name" {
   description = "Network name"
@@ -60,7 +66,7 @@ variable "cluster_autoscaling" {
 
 variable "node_pools_config" {
   description = "Node pools configuration"
-    type        = list(map(any))
+  type        = list(map(any))
 }
 
 variable "node_pools_taints" {

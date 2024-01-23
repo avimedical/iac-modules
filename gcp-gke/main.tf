@@ -10,6 +10,7 @@ module "gke" {
   zones      = var.zones
   network    = var.network_name
   subnetwork = var.subnetwork_name
+  kubernetes_version = var.kubernetes_version 
 
   //dedicated Secondary IP range for pods
   ip_range_pods = "pod-ip-range"
