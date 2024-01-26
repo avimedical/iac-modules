@@ -1,5 +1,5 @@
 resource "google_service_account" "sa" {
-  account_id   = var.namespace
+  account_id   = var.sa_name
   display_name = var.sa_display_name
 }
 
@@ -19,6 +19,6 @@ resource "google_project_iam_binding" "sa_iam_binding_roles" {
   role     = each.key
 
   members = [
-    "serviceAccount:${var.namespace}@${var.project_id}.iam.gserviceaccount.com",
+    "serviceAccount:${var.sa_name}@${var.project_id}.iam.gserviceaccount.com",
   ]
 }
