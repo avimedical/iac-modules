@@ -3,14 +3,14 @@ module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
   version = "~> 29.0"
 
-  project_id = var.project_id
-  name       = var.cluster_name
-  region     = var.region
-  regional   = false
-  zones      = var.zones
-  network    = var.network_name
-  subnetwork = var.subnetwork_name
-  kubernetes_version = var.kubernetes_version 
+  project_id         = var.project_id
+  name               = var.cluster_name
+  region             = var.region
+  regional           = false
+  zones              = var.zones
+  network            = var.network_name
+  subnetwork         = var.subnetwork_name
+  kubernetes_version = var.kubernetes_version
 
   //dedicated Secondary IP range for pods
   ip_range_pods = "pod-ip-range"
@@ -24,7 +24,7 @@ module "gke" {
   horizontal_pod_autoscaling        = true
   service_account                   = "create"
   remove_default_node_pool          = true
-  disable_legacy_metadata_endpoints = true  
+  disable_legacy_metadata_endpoints = true
   deletion_protection               = var.deletion_protection
   deploy_using_private_endpoint     = var.deploy_using_private_endpoint
   enable_shielded_nodes             = true
@@ -52,7 +52,7 @@ resource "google_compute_router" "router" {
   network = var.network_name
   region  = var.region
 
-  depends_on = [ module.gke ]
+  depends_on = [module.gke]
 }
 
 module "cloud-nat" {
@@ -64,5 +64,5 @@ module "cloud-nat" {
   name                               = "${var.cluster_name}-config"
   source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
 
-  depends_on = [ module.gke ]
+  depends_on = [module.gke]
 }
