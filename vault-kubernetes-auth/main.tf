@@ -80,7 +80,7 @@ resource "kubernetes_cluster_role_binding" "vault_access_ns" {
 }
 
 resource "vault_auth_backend" "kubernetes" {
-  path        = "kubernetes/${var.environment}/${var.namespace}}"
+  path        = "kubernetes/${var.environment}/${var.namespace}"
   type        = "kubernetes"
   description = "Kubernetes Authentication Backend for ${var.environment}/${var.namespace}"
 }
