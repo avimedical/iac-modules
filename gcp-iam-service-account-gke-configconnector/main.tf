@@ -13,12 +13,9 @@ resource "google_service_account_iam_binding" "sa_iam_binding_workload_identity_
 }
 
 // Add roles to the service account
-resource "google_project_iam_binding" "sa_iam_binding_roles" {
+resource "google_project_iam_member" "sa_iam_binding_roles" {
   for_each = toset(var.roles)
   project  = var.project_id
   role     = each.key
-
-  members = [
-    "serviceAccount:${var.sa_name}@${var.project_id}.iam.gserviceaccount.com",
-  ]
+  member = "serviceAccount:${var.sa_name}@${var.project_id}.iam.gserviceaccount.com"
 }
