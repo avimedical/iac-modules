@@ -252,6 +252,14 @@ variable "autoscaling_scale_in_control" {
   }
 }
 
+variable "disk_encryption_key" {}
+variable "automatic_restart" {}
+variable "num_instances" {}
+variable "deletion_protection" {}
+variable "network" {}
+variable "zone" {}
+variable "name_prefix" {}
+
 variable "autoscaling_enabled" {
   description = "Creates an autoscaler for the managed instance group"
   type        = bool
