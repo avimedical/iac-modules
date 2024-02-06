@@ -8,7 +8,7 @@ resource "google_service_account_iam_binding" "sa_iam_binding_workload_identity_
   role               = "roles/iam.workloadIdentityUser"
 
   members = [
-    "serviceAccount:${var.project_id}.svc.id.goog[cnrm-system/cnrm-controller-manager-${var.namespace}]",
+    "serviceAccount:${var.project_id}.svc.id.goog[cnrm-system/cnrm-controller-manager-${var.namespace}]"
   ]
 }
 
