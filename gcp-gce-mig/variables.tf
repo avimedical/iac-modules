@@ -105,17 +105,17 @@ variable "additional_disks" {
 
 
 /* metadata */
-variable "startup_script" {
-  description = "User startup script to run when instances spin up"
-  default     = ""
-}
-
 variable "metadata" {
   type        = map(string)
   description = "Metadata, provided as a map"
   default     = {}
 }
 
+variable "startup_script" {
+  description = "User startup script to run when instances spin up"
+  type        = string
+  default     = ""
+}
 /* service account */
 variable "service_account" {
   default = null
@@ -266,8 +266,3 @@ variable "autoscaling_enabled" {
   default     = false
 }
 
-variable "startup_script" {
-  description = "User startup script to run when instances spin up"
-  type        = string
-  default     = ""
-}
