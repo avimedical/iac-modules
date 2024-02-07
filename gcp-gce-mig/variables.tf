@@ -265,3 +265,9 @@ variable "autoscaling_enabled" {
   type        = bool
   default     = false
 }
+
+variable "startup_script" {
+  description = "User startup script to run when instances spin up"
+  type        = string
+  default     = ""
+}
