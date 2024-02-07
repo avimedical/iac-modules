@@ -14,6 +14,7 @@ module "instance_template" {
   source_image_family  = var.source_image_family
   source_image_project = var.project_id
   automatic_restart    = var.automatic_restart
+  metadata_startup_script = var.startup_script
   tags                 = var.tags
 }
 
