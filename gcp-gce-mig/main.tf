@@ -66,5 +66,8 @@ module "ilb" {
     failover    = false
   }]
 
-  health_check = var.health_check
+  health_check = merge(
+    var.health_check, "enable_logging",
+    { enable_log = var.health_check.enable_logging }
+  )
 }
