@@ -181,6 +181,7 @@ variable "health_check" {
     request_path        = string
     host                = string
     enable_logging      = string
+    port_name           = string
   })
   default = {
     type                = "http"
@@ -196,6 +197,7 @@ variable "health_check" {
     request_path        = "/"
     host                = ""
     enable_logging      = false
+    port_name           = "HTTP"
   }
 }
 
@@ -265,4 +267,17 @@ variable "autoscaling_enabled" {
   type        = bool
   default     = false
 }
+
+variable "ilb_enabled" {
+  description = "Creates an internal load balancer for the managed instance group"
+  type        = bool
+  default     = false
+}
+
+variable "ilb_source_tags" {
+  description = "Source tags to be used by the internal load balancer"
+  type        = list(string)
+  default     = []
+}
+
 

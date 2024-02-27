@@ -45,3 +45,26 @@ module "mig" {
   autoscaling_lb               = var.autoscaling_lb
   autoscaling_scale_in_control = var.autoscaling_scale_in_control
 }
+
+module "ilb" {
+  count       = var.ilb_enabled == true ? 1 : 0 
+
+  source      = "GoogleCloudPlatform/lb-internal/google"
+  version     = "~> 5.0"
+  project     = var.project_id
+  network     = var.network
+  subnetwork  = var.subnetwork
+  region      = var.region
+  name        = "${var.name_prefix}-ilb"
+  ports       = [var.health_check.port]
+  source_tags = var.source_tags
+  target_tags = var.tags
+
+  backends = [{
+    group       = module.mig.instance_group
+    description = ""
+    failover    = false
+  }]
+
+  health_check = var.health_check
+}
