@@ -3,5 +3,5 @@ output "instance_group" {
 }
 
 output "load_balancer_ip" {
-  value = module.ilb.ip_address
+  value = try(module.ilb[0].ip_address, null)
 }
