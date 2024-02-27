@@ -57,7 +57,7 @@ module "ilb" {
   region      = var.region
   name        = "${var.name_prefix}-ilb"
   ports       = [var.health_check.port]
-  source_tags = var.source_tags
+  source_tags = var.ilb_source_tags
   target_tags = var.tags
 
   backends = [{
