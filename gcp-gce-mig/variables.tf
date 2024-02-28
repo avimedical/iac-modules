@@ -171,6 +171,8 @@ variable "update_policy" {
     max_surge_fixed              = number
     instance_redistribution_type = string
     max_unavailable_fixed        = number
+    max_surge_percent            = number
+    max_unavailable_percent      = number
     min_ready_sec                = number
     replacement_method           = string
     minimal_action               = string
@@ -183,6 +185,8 @@ variable "update_policy" {
     most_disruptive_allowed_action = "REPLACE"
     max_surge_fixed                = 1
     max_unavailable_fixed          = 0
+    max_surge_percent              = null
+    max_unavailable_percent        = null
     min_ready_sec                  = 120
     replacement_method             = "SUBSTITUTE"
   }]
