@@ -183,7 +183,7 @@ variable "update_policy" {
     instance_redistribution_type   = "PROACTIVE"
     minimal_action                 = "REPLACE"
     most_disruptive_allowed_action = "REPLACE"
-    max_surge_fixed                = 0
+    max_surge_fixed                = 3
     max_unavailable_fixed          = 0
     max_surge_percent              = null
     max_unavailable_percent        = null

@@ -17,5 +17,5 @@ resource "google_project_iam_member" "sa_iam_binding_roles" {
   for_each = toset(var.roles)
   project  = var.project_id
   role     = each.key
-  member = "serviceAccount:${var.sa_name}@${var.project_id}.iam.gserviceaccount.com"
+  member   = "serviceAccount:${var.sa_name}@${var.project_id}.iam.gserviceaccount.com"
 }

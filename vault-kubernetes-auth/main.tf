@@ -109,7 +109,7 @@ resource "vault_kubernetes_auth_backend_role" "kubernetes" {
   backend                          = vault_auth_backend.kubernetes.path
   role_name                        = "k8s-${var.environment}-${var.namespace}-auth-role"
   bound_service_account_names      = [var.sa_name]
-  bound_service_account_namespaces =  [var.namespace]
+  bound_service_account_namespaces = [var.namespace]
   token_policies                   = [vault_policy.kubernetes.name]
   token_ttl                        = 3600
 }

@@ -3,7 +3,7 @@ variable "namespace" {
 }
 
 variable "sa_name" {
-  
+
 }
 variable "sa_display_name" {
 
