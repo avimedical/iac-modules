@@ -9,13 +9,17 @@ module "instance_template" {
   subnetwork           = var.subnetwork
   service_account      = var.service_account
   disk_encryption_key  = var.disk_encryption_key
+  disk_type            = var.disk_type
+  disk_size            = var.disk_size
   machine_type         = var.machine_type
   source_image         = var.source_image
   source_image_family  = var.source_image_family
   source_image_project = var.project_id
   automatic_restart    = var.automatic_restart
   startup_script       = var.startup_script
+  spot                 = var.spot
   tags                 = var.tags
+  labels               = var.labels
 }
 
 module "mig" {

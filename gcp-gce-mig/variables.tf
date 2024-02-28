@@ -1,8 +1,3 @@
-variable "hostname" {
-  description = "Hostname prefix for instances."
-  default     = "default"
-}
-
 variable "region" {
   description = "The GCP region where instances will be deployed."
   type        = string
@@ -31,9 +26,15 @@ variable "named_ports" {
 ####################
 # Instance Template
 ####################
+
 variable "machine_type" {
   description = "Machine type to create, e.g. n1-standard-1"
   default     = "n1-standard-1"
+}
+
+variable "spot" {
+  description = "Provision a spot instance"
+  default = false
 }
 
 variable "can_ip_forward" {
@@ -69,9 +70,9 @@ variable "source_image_project" {
   default     = ""
 }
 
-variable "disk_size_gb" {
+variable "disk_size" {
   description = "Disk size in GB"
-  default     = "100"
+  default     = "20"
 }
 
 variable "disk_type" {
@@ -103,8 +104,6 @@ variable "additional_disks" {
   default = []
 }
 
-
-/* metadata */
 variable "metadata" {
   type        = map(string)
   description = "Metadata, provided as a map"
@@ -116,7 +115,7 @@ variable "startup_script" {
   type        = string
   default     = ""
 }
-/* service account */
+
 variable "service_account" {
   default = null
   type = object({
@@ -129,6 +128,11 @@ variable "service_account" {
 ##########################
 # Mananged Instance Group
 ##########################
+
+variable "hostname" {
+  description = "Hostname prefix for instances."
+  default     = "default"
+}
 
 variable "target_size" {
   description = "The target number of running instances for this managed or unmanaged instance group. This value should always be explicitly set unless this resource is attached to an autoscaler, in which case it should never be set."
@@ -152,15 +156,22 @@ variable "update_policy" {
   type = list(object({
     max_surge_fixed              = number
     instance_redistribution_type = string
-    max_surge_percent            = number
     max_unavailable_fixed        = number
-    max_unavailable_percent      = number
     min_ready_sec                = number
     replacement_method           = string
     minimal_action               = string
     type                         = string
   }))
-  default = []
+  default = [{
+  type                           = "PROACTIVE"
+  instance_redistribution_type   = "PROACTIVE"
+  minimal_action                 = "REPLACE"
+  most_disruptive_allowed_action = "REPLACE"
+  max_surge_fixed                = 1
+  max_unavailable_fixed          = 0
+  min_ready_sec                  = 120
+  replacement_method             = "SUBSTITUTE"
+}]
 }
 
 /* health checks */
@@ -203,14 +214,20 @@ variable "health_check" {
 
 /* autoscaler */
 
+variable "autoscaling_enabled" {
+  description = "Creates an autoscaler for the managed instance group"
+  type        = bool
+  default     = false
+}
+
 variable "max_replicas" {
   description = "The maximum number of instances that the autoscaler can scale up to. This is required when creating or updating an autoscaler. The maximum number of replicas should not be lower than minimal number of replicas."
-  default     = 10
+  default     = 1
 }
 
 variable "min_replicas" {
   description = "The minimum number of replicas that the autoscaler can scale down to. This cannot be less than 0."
-  default     = 2
+  default     = 1
 }
 
 variable "cooldown_period" {
@@ -262,11 +279,6 @@ variable "network" {}
 variable "zone" {}
 variable "name_prefix" {}
 
-variable "autoscaling_enabled" {
-  description = "Creates an autoscaler for the managed instance group"
-  type        = bool
-  default     = false
-}
 
 variable "ilb_enabled" {
   description = "Creates an internal load balancer for the managed instance group"
