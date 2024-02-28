@@ -235,7 +235,7 @@ variable "health_check" {
 variable "autoscaling_enabled" {
   description = "Creates an autoscaler for the managed instance group"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "max_replicas" {
