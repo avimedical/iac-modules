@@ -34,7 +34,7 @@ variable "machine_type" {
 
 variable "spot" {
   description = "Provision a spot instance"
-  default = false
+  default     = false
 }
 
 variable "can_ip_forward" {
@@ -70,7 +70,7 @@ variable "source_image_project" {
   default     = ""
 }
 
-variable "disk_size" {
+variable "disk_size_gb" {
   description = "Disk size in GB"
   default     = "20"
 }
@@ -93,13 +93,13 @@ variable "auto_delete" {
 variable "additional_disks" {
   description = "List of maps of additional disks. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#disk_name"
   type = list(object({
-    disk_name    = string
-    device_name  = string
-    auto_delete  = bool
-    boot         = bool
-    disk_size_gb = number
-    disk_type    = string
-    disk_labels  = map(string)
+    disk_name       = string
+    device_name     = string
+    auto_delete     = bool
+    boot            = bool
+    disk_size_gb_gb = number
+    disk_type       = string
+    disk_labels     = map(string)
   }))
   default = []
 }
@@ -163,15 +163,15 @@ variable "update_policy" {
     type                         = string
   }))
   default = [{
-  type                           = "PROACTIVE"
-  instance_redistribution_type   = "PROACTIVE"
-  minimal_action                 = "REPLACE"
-  most_disruptive_allowed_action = "REPLACE"
-  max_surge_fixed                = 1
-  max_unavailable_fixed          = 0
-  min_ready_sec                  = 120
-  replacement_method             = "SUBSTITUTE"
-}]
+    type                           = "PROACTIVE"
+    instance_redistribution_type   = "PROACTIVE"
+    minimal_action                 = "REPLACE"
+    most_disruptive_allowed_action = "REPLACE"
+    max_surge_fixed                = 1
+    max_unavailable_fixed          = 0
+    min_ready_sec                  = 120
+    replacement_method             = "SUBSTITUTE"
+  }]
 }
 
 /* health checks */

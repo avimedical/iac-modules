@@ -10,7 +10,7 @@ module "instance_template" {
   service_account      = var.service_account
   disk_encryption_key  = var.disk_encryption_key
   disk_type            = var.disk_type
-  disk_size            = var.disk_size
+  disk_size_gb         = var.disk_size_gb
   machine_type         = var.machine_type
   source_image         = var.source_image
   source_image_family  = var.source_image_family
@@ -51,7 +51,7 @@ module "mig" {
 }
 
 module "ilb" {
-  count       = var.ilb_enabled == true ? 1 : 0 
+  count = var.ilb_enabled == true ? 1 : 0
 
   source      = "GoogleCloudPlatform/lb-internal/google"
   version     = "~> 5.0"
