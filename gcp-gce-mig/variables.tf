@@ -1,7 +1,25 @@
+variable "project_id" {
+  description = "The GCP project to use for integration tests"
+  type        = string
+}
+
 variable "region" {
   description = "The GCP region where instances will be deployed."
   type        = string
-  default     = "us-central1"
+  default     = "europe-west3"
+}
+
+variable "zone" {
+  description = "The zone where the instance should be created"
+  type        = string
+  default     = "europe-west3-a"
+}
+
+
+variable "network" {
+  description = "The name or self_link of the network to which this instance will be attached"
+  type        = string
+  default     = "default"
 }
 
 variable "subnetwork" {
@@ -9,10 +27,6 @@ variable "subnetwork" {
   default     = ""
 }
 
-variable "project_id" {
-  description = "The GCP project to use for integration tests"
-  type        = string
-}
 
 variable "named_ports" {
   description = "Named name and named port"
@@ -271,13 +285,34 @@ variable "autoscaling_scale_in_control" {
   }
 }
 
-variable "disk_encryption_key" {}
-variable "automatic_restart" {}
-variable "num_instances" {}
-variable "deletion_protection" {}
-variable "network" {}
-variable "zone" {}
-variable "name_prefix" {}
+variable "disk_encryption_key" {
+  description = "The self link to the encryption key that's used to encrypt the disk"
+  type        = string
+  default     = ""
+}
+
+variable "automatic_restart" {
+  description = "Specifies whether the instance should be automatically restarted if it is terminated by Compute Engine"
+  type        = bool
+  default     = true
+}
+
+variable "num_instances" {
+  description = "The number of instances to create"
+  type        = number
+  default     = 1
+}
+
+variable "deletion_protection" {
+  description = "Whether the resource should be protected against deletion"
+  type        = bool
+  default     = false
+}
+
+variable "name_prefix" {
+  description = "The prefix for the names of the instances"
+  type        = string
+}
 
 
 variable "ilb_enabled" {
