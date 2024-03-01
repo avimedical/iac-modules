@@ -159,10 +159,16 @@ variable "target_pools" {
   default     = []
 }
 
+variable "distribution_policy_target_shape" {
+  description = "The distribution policy, i.e. how instances should be distributed. Can be (EVEN, BALANCED, ANY, ANY_SINGLE_ZONE). Default is ANY_SINGLE_ZONE."
+  type        = string
+  default     = "ANY_SINGLE_ZONE"
+}
+
 variable "distribution_policy_zones" {
   description = "The distribution policy, i.e. which zone(s) should instances be create in. Default is all zones in given region."
   type        = list(string)
-  default     = []
+  default     = ["europe-west3-a"]
 }
 
 variable "update_policy" {
