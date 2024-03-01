@@ -186,7 +186,7 @@ variable "update_policy" {
   }))
   default = [{
     type                           = "PROACTIVE"
-    instance_redistribution_type   = "PROACTIVE"
+    instance_redistribution_type   = "NONE"
     minimal_action                 = "REPLACE"
     most_disruptive_allowed_action = "REPLACE"
     max_surge_fixed                = 3
