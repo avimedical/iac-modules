@@ -150,7 +150,7 @@ variable "hostname" {
 
 variable "target_size" {
   description = "The target number of running instances for this managed or unmanaged instance group. This value should always be explicitly set unless this resource is attached to an autoscaler, in which case it should never be set."
-  default     = 1
+  default     = null
 }
 
 variable "target_pools" {
@@ -159,16 +159,10 @@ variable "target_pools" {
   default     = []
 }
 
-variable "distribution_policy_target_shape" {
-  description = "The distribution policy, i.e. how instances should be distributed. Can be (EVEN, BALANCED, ANY, ANY_SINGLE_ZONE). Default is ANY_SINGLE_ZONE."
-  type        = string
-  default     = "ANY_SINGLE_ZONE"
-}
-
 variable "distribution_policy_zones" {
   description = "The distribution policy, i.e. which zone(s) should instances be create in. Default is all zones in given region."
   type        = list(string)
-  default     = ["europe-west3-a"]
+  default     = []
 }
 
 variable "update_policy" {
@@ -186,7 +180,7 @@ variable "update_policy" {
   }))
   default = [{
     type                           = "PROACTIVE"
-    instance_redistribution_type   = "NONE"
+    instance_redistribution_type   = "PROACTIVE"
     minimal_action                 = "REPLACE"
     most_disruptive_allowed_action = "REPLACE"
     max_surge_fixed                = 3

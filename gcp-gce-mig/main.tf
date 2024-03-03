@@ -32,8 +32,6 @@ module "mig" {
   instance_template                = module.instance_template.self_link
   target_size                      = var.target_size
   target_pools                     = var.target_pools
-  distribution_policy_target_shape = var.distribution_policy_target_shape
-  distribution_policy_zones        = var.distribution_policy_zones
   update_policy                    = var.update_policy
   named_ports                      = var.named_ports
 
