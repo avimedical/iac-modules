@@ -1,3 +1,18 @@
+variable "cluster_ca_certificate" {
+  description = "The public certificate that is the root of trust for the cluster."
+  type        = string
+}
+
+variable "host" {
+  description = "The server to connect to (the Kubernetes master endpoint)."
+  type        = string
+}
+
+variable "token" {
+  description = "The token to authenticate with the Kubernetes master."
+  type        = string
+}
+
 variable "service_name" {
   type        = string
   description = "The name of the service for which we want to create a user ane grant privileges."
