@@ -1,5 +1,5 @@
 locals {
-  prefix   = "${var.service_name}-${var.username}"
+  prefix   = "${var.service_name}-${var.user}"
   username = "${local.prefix}-user"
 }
 
