@@ -1,6 +1,6 @@
 locals {
   prefix   = "${var.service_name}-${var.username}"
-  username = "${var.prefix}-user"
+  username = "${local.prefix}-user"
 }
 
 resource "random_password" "mysql_user_password" {
@@ -11,7 +11,7 @@ resource "random_password" "mysql_user_password" {
 
 resource "kubernetes_secret" "mysql_user_password_secret" {
   metadata {
-    name      = "${var.prefix}-password"
+    name      = "${local.prefix}-password"
     namespace = var.crossplane_namespace
   }
   data = {
@@ -44,7 +44,7 @@ resource "kubernetes_manifest" "mysql_user" {
         }
       }
       "writeConnectionSecretToRef" = {
-        "name"      = "${var.prefix}-credentials"
+        "name"      = "${local.prefix}-credentials"
         "namespace" = var.service_namespace
       }
     }
@@ -56,7 +56,7 @@ resource "kubernetes_manifest" "mysql_grant" {
     "apiVersion" = "mysql.sql.crossplane.io/v1alpha1"
     "kind"       = "Grant"
     "metadata" = {
-      "name" = "${var.prefix}-grant"
+      "name" = "${local.prefix}-grant"
     }
     "spec" = {
       "providerConfigRef" = {
