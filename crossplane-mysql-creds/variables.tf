@@ -57,7 +57,7 @@ variable "crossplane_namespace" {
   description = "The namespace in which Crossplane is installed."
 }
 
-variable "mysql_provider_name" {
+variable "mysql_provider_config" {
   type        = string
-  description = "The name of the MySQL provider to be used."
+  description = "The name of the MySQL provider config to be used."
 }

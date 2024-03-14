@@ -28,7 +28,7 @@ resource "kubernetes_manifest" "mysql_user" {
     }
     "spec" = {
       "providerConfigRef" = {
-        "name" = var.mysql_provider_name
+        "name" = var.mysql_provider_config
       }
       "forProvider" = {
         "passwordSecretRef" = {
@@ -60,7 +60,7 @@ resource "kubernetes_manifest" "mysql_grant" {
     }
     "spec" = {
       "providerConfigRef" = {
-        "name" = var.mysql_provider_name
+        "name" = var.mysql_provider_config
       }
       "forProvider" = {
         "databaseRef" = {
