@@ -1,5 +1,5 @@
 locals {
-  prefix   = "${var.service_name}-${var.user}"
+  prefix   = "${var.database}-${var.user}"
   username = "${local.prefix}-user"
 }
 
@@ -64,7 +64,7 @@ resource "kubernetes_manifest" "mysql_grant" {
       }
       "forProvider" = {
         "databaseRef" = {
-          "name" = var.service_name
+          "name" = var.database
         }
         "privileges" = var.grant_privileges
         "userRef" = {

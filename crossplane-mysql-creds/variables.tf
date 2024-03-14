@@ -13,9 +13,9 @@ variable "token" {
   type        = string
 }
 
-variable "service_name" {
+variable "database" {
   type        = string
-  description = "The name of the service for which we want to create a user ane grant privileges."
+  description = "The name of the database for which we want to create a user ane grant privileges."
 }
 
 variable "service_namespace" {
