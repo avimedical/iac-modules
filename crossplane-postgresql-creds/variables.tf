@@ -29,25 +29,22 @@ variable "user" {
   description = "Description of the user. Use something descriptive, such as 'service' or 'migration'"
 }
 
-variable "user_privileges" {
+variable "role_privileges" {
   type = object({
     login    = bool
     createDb = bool
   })
   default = {
-          "login"    = true
-          "createDb" = true
-        }
+    "login"    = true
+    "createDb" = true
+  }
   description = "Privilege flags associated with the user role."
 }
 
 variable "grant_privileges" {
   type = list(string)
   default = [
-    "SELECT",
-    # "INSERT",
-    # "UPDATE",
-    # "DELETE"
+    "CONNECT",
   ]
   description = "The list of privileges to be granted to the user."
 }
