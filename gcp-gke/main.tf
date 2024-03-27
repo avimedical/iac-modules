@@ -3,15 +3,15 @@ module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
   version = "~> 29.0"
 
-  project_id         = var.project_id
-  name               = var.cluster_name
-  region             = var.region
-  regional           = false
-  zones              = var.zones
-  network            = var.network_name
-  subnetwork         = var.subnetwork_name
-  kubernetes_version = var.kubernetes_version
-
+  project_id          = var.project_id
+  name                = var.cluster_name
+  region              = var.region
+  regional            = false
+  zones               = var.zones
+  network             = var.network_name
+  subnetwork          = var.subnetwork_name
+  kubernetes_version  = var.kubernetes_version
+  database_encryption = var.database_encryption
   //dedicated Secondary IP range for pods
   ip_range_pods = "pod-ip-range"
   //dedicated Secondary IP range for services

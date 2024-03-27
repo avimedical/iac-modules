@@ -33,7 +33,15 @@ variable "enable_vertical_pod_autoscaling" {
   description = "Enable vertical pod autoscaling"
   default     = false
 }
+variable "database_encryption" {
+  description = "Application-layer Secrets Encryption settings. The object format is {state = string, key_name = string}. Valid values of state are: \"ENCRYPTED\"; \"DECRYPTED\". key_name is the name of a CloudKMS key."
+  type        = list(object({ state = string, key_name = string }))
 
+  default = [{
+    state    = "DECRYPTED"
+    key_name = ""
+  }]
+}
 variable "cluster_autoscaling" {
   type = object({
     enabled       = bool
