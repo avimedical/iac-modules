@@ -13,9 +13,9 @@ module "gke" {
   kubernetes_version  = var.kubernetes_version
   database_encryption = var.database_encryption
   //dedicated Secondary IP range for pods
-  ip_range_pods = "pod-ip-range"
+  ip_range_pods = var.ip_range_pods
   //dedicated Secondary IP range for services
-  ip_range_services = "service-ip-range"
+  ip_range_services = var.ip_range_services
 
   enable_private_endpoint           = var.enable_private_endpoint
   enable_private_nodes              = true

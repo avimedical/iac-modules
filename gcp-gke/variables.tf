@@ -25,6 +25,13 @@ variable "subnetwork_name" {
   description = "Subnetwork name"
 }
 
+variable "ip_range_pods" {
+  default = "pod-ip-range"
+}
+
+variable "ip_range_services" {
+  default = "service-ip-range"
+}
 variable "deletion_protection" {
   description = "Deletion protection"
   default     = false
