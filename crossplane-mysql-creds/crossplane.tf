@@ -36,12 +36,12 @@ resource "kubernetes_manifest" "mysql_user" {
           "name"      = kubernetes_secret.mysql_user_password_secret.metadata[0].name
           "namespace" = var.crossplane_namespace
         }
-        "resourceOptions" = {
-          "maxConnectionsPerHour" = 100
-          "maxQueriesPerHour"     = 1000
-          "maxUpdatesPerHour"     = 1000
-          "maxUserConnections"    = 20
-        }
+        # "resourceOptions" = {
+        #   "maxConnectionsPerHour" = 100
+        #   "maxQueriesPerHour"     = 1000
+        #   "maxUpdatesPerHour"     = 1000
+        #   "maxUserConnections"    = 20
+        # }
       }
       "writeConnectionSecretToRef" = {
         "name"      = "${local.prefix}-credentials"
