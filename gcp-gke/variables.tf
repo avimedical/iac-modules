@@ -131,3 +131,7 @@ variable "deploy_using_private_endpoint" {
   description = "Whether to deploy using private endpoint."
   default     = false
 }
+
+variable "remove_default_node_pool" {
+  default = true
+}
