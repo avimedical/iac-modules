@@ -19,11 +19,11 @@ module "gke" {
 
   enable_private_endpoint           = var.enable_private_endpoint
   enable_private_nodes              = true
-  master_ipv4_cidr_block            = "172.16.0.0/28"
+  master_ipv4_cidr_block            = var.master_ipv4_cidr_block
   network_policy                    = true
   horizontal_pod_autoscaling        = true
   service_account                   = "create"
-  remove_default_node_pool          = true
+  remove_default_node_pool          = var.remove_default_node_pool
   disable_legacy_metadata_endpoints = true
   deletion_protection               = var.deletion_protection
   deploy_using_private_endpoint     = var.deploy_using_private_endpoint
@@ -43,26 +43,4 @@ module "gke" {
   node_pools_labels       = var.node_pools_labels
   node_pools_metadata     = var.node_pools_metadata
   node_pools_tags         = var.node_pools_tags
-}
-
-# [START cloudnat_router_nat_gke]
-resource "google_compute_router" "router" {
-  project = var.project_id
-  name    = "${var.cluster_name}-router"
-  network = var.network_name
-  region  = var.region
-
-  depends_on = [module.gke]
-}
-
-module "cloud-nat" {
-  source                             = "terraform-google-modules/cloud-nat/google"
-  version                            = "~> 5.0"
-  project_id                         = var.project_id
-  region                             = var.region
-  router                             = google_compute_router.router.name
-  name                               = "${var.cluster_name}-config"
-  source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
-
-  depends_on = [module.gke]
 }
