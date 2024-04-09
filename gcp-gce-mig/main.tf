@@ -74,3 +74,20 @@ module "ilb" {
     { enable_log = var.health_check.enable_logging }
   )
 }
+
+resource "google_compute_firewall" "allow_ssh" {
+  count = var.allow_ssh == true ? 1 : 0
+
+  name    = "${var.name_prefix}-allow-ssh"
+  network = var.network
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+
+  source_ranges = [
+    "35.235.240.0/20" #  IAP TCP forwarding IP range
+  ]
+  target_tags   = var.tags
+}

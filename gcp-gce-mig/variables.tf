@@ -331,4 +331,8 @@ variable "ilb_source_tags" {
   default     = []
 }
 
-
+variable "allow_ssh" {
+  description = "Create firewall rule for SSH access"
+  type        = bool
+  default     = false
+}
