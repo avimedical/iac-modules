@@ -9,7 +9,7 @@ data "google_dns_managed_zone" "zone" {
 }
 
 resource "google_dns_record_set" "dns_record" {
-  for_each     = toset(local.hostnames)
+  for_each     = { for idx, hostname in local.hostnames : idx => hostname }
   name         = "${each.value}.${data.google_dns_managed_zone.zone[0].dns_name}"
   type         = "A"
   ttl          = 3600
