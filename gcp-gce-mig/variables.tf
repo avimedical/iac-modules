@@ -336,3 +336,16 @@ variable "allow_ssh" {
   type        = bool
   default     = false
 }
+
+
+variable "dns" {
+  description = "DNS configuration"
+  type = object({
+    create_dns_record = bool
+    zone_name         = optional(string)
+    hostnames         = optional(list(string))
+  })
+  default = {
+    create_dns_record = false
+  }
+}

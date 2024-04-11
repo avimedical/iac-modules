@@ -135,3 +135,15 @@ variable "deploy_using_private_endpoint" {
 variable "remove_default_node_pool" {
   default = true
 }
+
+variable "dns" {
+  description = "DNS configuration"
+  type = object({
+    create_dns_record = bool
+    zone_name         = optional(string)
+    hostnames         = optional(list(string))
+  })
+  default = {
+    create_dns_record = false
+  }
+}
