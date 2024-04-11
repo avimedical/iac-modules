@@ -1,5 +1,5 @@
 locals {
-  hostnames = var.dns.create_dns_record && try(module.ilb[0].ip_address, null) != null ? { for idx, hostname in local.hostnames : idx => hostname } : {}
+  hostnames = var.dns.create_dns_record && try(module.ilb[0].ip_address, null) != null ? { for idx, hostname in var.dns.create_dns_record : idx => hostname } : {}
 }
 
 data "google_dns_managed_zone" "zone" {
@@ -9,7 +9,7 @@ data "google_dns_managed_zone" "zone" {
 }
 
 resource "google_dns_record_set" "dns_record" {
-  for_each     = { for idx, hostname in local.hostnames : idx => hostname }
+  for_each     = local.hostnames
   name         = "${each.value}.${data.google_dns_managed_zone.zone[0].dns_name}"
   type         = "A"
   ttl          = 3600
