@@ -9,7 +9,7 @@ data "google_dns_managed_zone" "zone" {
 }
 
 resource "google_dns_record_set" "dns_record" {
-  for_each     = zipmap(local.hostnames, local.hostnames)
+  for_each     = local.hostnames
   name         = "${each.value}.${data.google_dns_managed_zone.zone[0].dns_name}"
   type         = "A"
   ttl          = 3600
