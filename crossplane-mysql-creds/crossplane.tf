@@ -1,8 +1,8 @@
 locals {
   prefix   = "${var.database}-${var.user}"
   prefix_array = split("-", local.prefix)
-  prefix_transformed = length(element(prefix_array, 0)) > 32 ? substr(element(prefix_array, 0), 0, 32) : element(prefix_array, 0)
-  prefix_short = join("-", [prefix_transformed] + slice(prefix_array, 1, length(prefix_array)))
+  prefix_transformed = length(element(local.prefix_array, 0)) > 32 ? substr(element(local.prefix_array, 0), 0, 32) : element(local.prefix_array, 0)
+  prefix_short = join("-", [local.prefix_transformed] + slice(local.prefix_array, 1, length(local.prefix_array)))
   username = "${local.prefix_short}-user"
 }
 
