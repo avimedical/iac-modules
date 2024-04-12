@@ -2,7 +2,7 @@ locals {
   prefix   = "${var.database}-${var.user}"
   prefix_array = split("-", local.prefix)
   prefix_transformed = substr(element(local.prefix_array, 0), 0, 3)
-  prefix_short = length(local.prefix) > 24 ? join("-", concat([local.prefix_transformed], slice(local.prefix_array, 1, length(local.prefix_array)))) : local.prefix
+  prefix_short = length(local.prefix) > 28 ? join("-", concat([local.prefix_transformed], slice(local.prefix_array, 1, length(local.prefix_array)))) : local.prefix
   username = "${local.prefix_short}-user"
 }
 
@@ -47,7 +47,7 @@ resource "kubernetes_manifest" "mysql_user" {
         # }
       }
       "writeConnectionSecretToRef" = {
-        "name"      = "${local.prefix}-credentials"
+        "name"      = "${local.prefix_short}-credentials"
         "namespace" = var.service_namespace
       }
     }
