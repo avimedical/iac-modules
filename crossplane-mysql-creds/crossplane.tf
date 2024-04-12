@@ -71,7 +71,7 @@ resource "kubernetes_manifest" "mysql_grant" {
         }
         "privileges" = var.grant_privileges
         "userRef" = {
-          "name" = kubernetes_manifest.mysql_user.manifest.metadata.name
+          "name" = local.username
         }
       }
     }
