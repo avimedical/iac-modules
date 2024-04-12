@@ -1,6 +1,9 @@
 locals {
   prefix   = "${var.database}-${var.user}"
-  username = "${local.prefix}-user"
+  prefix_array = split("-", local.prefix)
+  prefix_transformed = length(element(prefix_array, 0)) > 32 ? substr(element(prefix_array, 0), 0, 32) : element(prefix_array, 0)
+  prefix_short = join("-", [prefix_transformed] + slice(prefix_array, 1, length(prefix_array)))
+  username = "${local.prefix_short}-user"
 }
 
 resource "random_password" "mysql_user_password" {
