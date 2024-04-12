@@ -1,5 +1,5 @@
 locals {
-  hostnames = var.dns.create_dns_record && try(module.ilb[0].ip_address, null) != null ? { for idx, hostname in var.dns.create_dns_record : idx => hostname } : {}
+  hostnames = var.dns.create_dns_record && var.ilb_enabled == true ? var.dns.hostnames : []
 }
 
 data "google_dns_managed_zone" "zone" {
