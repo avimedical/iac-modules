@@ -331,4 +331,14 @@ variable "ilb_source_tags" {
   default     = []
 }
 
+variable "elb_enabled" {
+  description = "Enable external load balancer"
+  type        = bool
+  default     = false
+}
 
+variable "external_hostname" {
+  description = "External hostname also the DNS record name"
+  type        = string
+  default     = "" 
+}
