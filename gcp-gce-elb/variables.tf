@@ -21,11 +21,6 @@ variable "region" {
   default     = "europe-west3"
 }
 
-variable "instance_name" {
-  description = "Name of the instance"
-  type        = string
-}
-
 variable "private_key" {
   description = "Private key"
   type        = string
@@ -52,5 +47,5 @@ variable "health_check_port" {
 variable "target_backend_group" {
   description = "target group"
   type        = string
-  default     = 80
+  default     = ""
 }
