@@ -31,7 +31,9 @@ resource "google_compute_backend_service" "backend_service" {
   health_checks                   = [google_compute_health_check.health_check.id]
 
   backend {
-    group          = var.target_backend_group
+    group                 = var.target_backend_group
+    balancing_mode        = "RATE"
+    max_rate_per_instance = 1000
   }
 }
 
