@@ -12,30 +12,17 @@ variable "project_id" {
 variable "zone" {
   description = "The GCP zone to create resources in"
   type        = string
-  default     = "europe-west4-a"
+  default     = "europe-west3-a"
 }
 
 variable "region" {
   description = "The GCP region to create and test resources in"
   type        = string
-  default     = "eu-west4"
-}
-
-variable "network" {
-  description = "The network selflink to host the compute instances in"
-}
-
-variable "subnetwork" {
-  description = "The subnetwork selflink to host the compute instances in"
+  default     = "europe-west3"
 }
 
 variable "instance_name" {
   description = "Name of the instance"
-  type        = string
-}
-
-variable "target_ip" {
-  description = "target IP"
   type        = string
 }
 
@@ -55,14 +42,15 @@ variable "load_balancing_scheme" {
   default     = "EXTERNAL"
 }
 
-variable "target_port" {
-  description = "Target port"
-  type        = number
-  default     = 80
-}
 
 variable "health_check_port" {
   description = "Health check port"
   type        = number
+  default     = 80
+}
+
+variable "target_backend_group" {
+  description = "target group"
+  type        = string
   default     = 80
 }
