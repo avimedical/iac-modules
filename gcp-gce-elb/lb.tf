@@ -33,7 +33,6 @@ resource "google_compute_backend_service" "backend_service" {
   backend {
     group          = var.target_backend_group
     balancing_mode = "RATE"
-    max_rate       = 1000
   }
 }
 
