@@ -80,9 +80,9 @@ resource "kubernetes_cluster_role_binding" "vault_access_ns" {
 }
 
 resource "vault_auth_backend" "kubernetes" {
-  path        = "kubernetes/${var.environment}/${var.namespace}"
+  path        = "kubernetes/${var.environment}/${var.domain}/${var.namespace}"
   type        = "kubernetes"
-  description = "Kubernetes Authentication Backend for ${var.environment}/${var.namespace}"
+  description = "Kubernetes Authentication Backend for ${var.environment}/${var.domain}/${var.namespace}"
 }
 
 resource "vault_kubernetes_auth_backend_config" "kubernetes" {
@@ -94,7 +94,7 @@ resource "vault_kubernetes_auth_backend_config" "kubernetes" {
 }
 
 resource "vault_policy" "kubernetes" {
-  name   = "kubernetes-${var.environment}-${var.namespace}-policy"
+  name   = "kubernetes-${var.environment}-${var.domain}-${var.namespace}-policy"
   policy = <<-EOT
   path "avimedical/*" {
     capabilities = ["read", "list"]
@@ -107,7 +107,7 @@ resource "vault_policy" "kubernetes" {
 
 resource "vault_kubernetes_auth_backend_role" "kubernetes" {
   backend                          = vault_auth_backend.kubernetes.path
-  role_name                        = "k8s-${var.environment}-${var.namespace}-auth-role"
+  role_name                        = "k8s-${var.environment}-${var.domain}-${var.namespace}-auth-role"
   bound_service_account_names      = [var.sa_name]
   bound_service_account_namespaces = [var.namespace]
   token_policies                   = [vault_policy.kubernetes.name]
