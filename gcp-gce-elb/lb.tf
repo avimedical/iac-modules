@@ -26,8 +26,8 @@ resource "google_compute_url_map" "url_map" {
 resource "google_compute_backend_service" "backend_service" {
   name                            = "${var.name}-backend-service"
   enable_cdn                      = true
-  timeout_sec                     = 10
-  connection_draining_timeout_sec = 10
+  timeout_sec                     = 300
+  connection_draining_timeout_sec = 60
   health_checks                   = [google_compute_health_check.health_check.id]
 
   backend {
