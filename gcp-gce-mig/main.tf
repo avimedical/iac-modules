@@ -75,6 +75,23 @@ module "ilb" {
   )
 }
 
+resource "google_compute_firewall" "allow_health_check" {
+  name    = "${var.name_prefix}-allow-health-check"
+  network = var.network
+
+  allow {
+    protocol = "tcp"
+    ports    = [var.health_check.port]
+  }
+
+  source_ranges = [
+    # Health check probe IP ranges, see https://cloud.google.com/load-balancing/docs/health-check-concepts#ip-ranges
+    "35.191.0.0/16",
+    "130.211.0.0/22"
+  ]
+  target_tags   = var.tags
+}
+
 resource "google_compute_firewall" "allow_ssh" {
   count = var.allow_ssh == true ? 1 : 0
 
