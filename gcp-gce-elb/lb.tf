@@ -35,6 +35,10 @@ resource "google_compute_backend_service" "backend_service" {
     balancing_mode        = "RATE"
     max_rate_per_instance = 1000
   }
+
+  log_config {
+    enable = true
+  }
 }
 
 resource "google_compute_health_check" "health_check" {
