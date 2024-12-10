@@ -49,3 +49,15 @@ variable "target_backend_group" {
   type        = string
   default     = ""
 }
+
+variable "timeout_sec" {
+  description = "Timeout in seconds"
+  type        = number
+  default     = 30
+}
+
+variable "connection_draining_timeout_sec" {
+  description = "Connection draining timeout in seconds"
+  type        = number
+  default     = 60
+}
