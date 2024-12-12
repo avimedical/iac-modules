@@ -26,14 +26,15 @@ module "mig" {
   source  = "terraform-google-modules/vm/google//modules/mig"
   version = "~> 10.0"
 
-  project_id        = var.project_id
-  hostname          = var.hostname
-  region            = var.region
-  instance_template = module.instance_template.self_link
-  target_size       = var.target_size
-  target_pools      = var.target_pools
-  update_policy     = var.update_policy
-  named_ports       = var.named_ports
+  project_id                = var.project_id
+  hostname                  = var.hostname
+  region                    = var.region
+  distribution_policy_zones = var.distribution_policy_zones
+  instance_template         = module.instance_template.self_link
+  target_size               = var.target_size
+  target_pools              = var.target_pools
+  update_policy             = var.update_policy
+  named_ports               = var.named_ports
 
   /* health check */
   health_check = var.health_check
