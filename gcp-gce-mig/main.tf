@@ -1,7 +1,7 @@
 
 module "instance_template" {
   source  = "terraform-google-modules/vm/google//modules/instance_template"
-  version = "~> 10.0"
+  version = "~> 13.2"
 
   name_prefix          = var.name_prefix
   region               = var.region
@@ -24,7 +24,7 @@ module "instance_template" {
 
 module "mig" {
   source  = "terraform-google-modules/vm/google//modules/mig"
-  version = "~> 10.0"
+  version = "~> 13.2"
 
   project_id                = var.project_id
   hostname                  = var.hostname
@@ -54,7 +54,7 @@ module "ilb" {
   count = var.ilb_enabled == true ? 1 : 0
 
   source      = "GoogleCloudPlatform/lb-internal/google"
-  version     = "~> 5.0"
+  version     = "~> 7.0"
   project     = var.project_id
   network     = var.network
   subnetwork  = var.subnetwork

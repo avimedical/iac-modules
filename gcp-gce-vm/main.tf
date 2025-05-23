@@ -1,7 +1,7 @@
 
 module "instance_template" {
   source  = "terraform-google-modules/vm/google//modules/instance_template"
-  version = "~> 10.0"
+  version = "~> 13.2"
 
   name_prefix          = var.name_prefix
   region               = var.region
@@ -19,7 +19,7 @@ module "instance_template" {
 
 module "compute_instance" {
   source  = "terraform-google-modules/vm/google//modules/compute_instance"
-  version = "~> 10.0"
+  version = "~> 13.2"
 
   region              = var.region
   zone                = var.zone
