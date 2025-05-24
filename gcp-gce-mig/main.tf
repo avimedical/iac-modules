@@ -24,7 +24,7 @@ module "instance_template" {
 
 module "mig" {
   source  = "terraform-google-modules/vm/google//modules/mig"
-  version = "~> 13.2"
+  version = "~> 12.0"
 
   project_id                = var.project_id
   hostname                  = var.hostname
