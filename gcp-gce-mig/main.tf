@@ -8,6 +8,7 @@ module "instance_template" {
   project_id           = var.project_id
   subnetwork           = var.subnetwork
   service_account      = var.service_account
+  create_service_account = false
   disk_encryption_key  = var.disk_encryption_key
   disk_type            = var.disk_type
   disk_size_gb         = var.disk_size_gb
@@ -24,7 +25,7 @@ module "instance_template" {
 
 module "mig" {
   source  = "terraform-google-modules/vm/google//modules/mig"
-  version = "~> 12.0"
+  version = "~> 13.2"
 
   project_id                = var.project_id
   hostname                  = var.hostname
