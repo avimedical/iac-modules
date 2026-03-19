@@ -10,12 +10,14 @@ resource "google_service_account_iam_binding" "sa_iam_binding_workload_identity_
   members = [
     "serviceAccount:${var.project_id}.svc.id.goog[cnrm-system/cnrm-controller-manager-${var.namespace}]"
   ]
+  depends_on = [google_service_account.sa]
 }
 
 // Add roles to the service account
 resource "google_project_iam_member" "sa_iam_binding_roles" {
-  for_each = toset(var.roles)
-  project  = var.project_id
-  role     = each.key
-  member   = "serviceAccount:${var.sa_name}@${var.project_id}.iam.gserviceaccount.com"
+  for_each   = toset(var.roles)
+  project    = var.project_id
+  role       = each.key
+  member     = "serviceAccount:${var.sa_name}@${var.project_id}.iam.gserviceaccount.com"
+  depends_on = [google_service_account.sa]
 }
