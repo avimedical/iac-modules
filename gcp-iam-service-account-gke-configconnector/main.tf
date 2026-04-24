@@ -3,14 +3,11 @@ resource "google_service_account" "sa" {
   display_name = var.sa_display_name
 }
 
-resource "google_service_account_iam_binding" "sa_iam_binding_workload_identity_user" {
+resource "google_service_account_iam_member" "sa_iam_binding_workload_identity_user" {
   service_account_id = google_service_account.sa.name
   role               = "roles/iam.workloadIdentityUser"
-
-  members = [
-    "serviceAccount:${var.project_id}.svc.id.goog[cnrm-system/cnrm-controller-manager-${var.namespace}]"
-  ]
-  depends_on = [google_service_account.sa]
+  member             = "serviceAccount:${var.project_id}.svc.id.goog[cnrm-system/cnrm-controller-manager-${var.namespace}]"
+  depends_on         = [google_service_account.sa]
 }
 
 // Add roles to the service account
