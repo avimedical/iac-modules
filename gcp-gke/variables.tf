@@ -157,3 +157,9 @@ variable "node_pools_linux_node_configs_sysctls" {
     all = {}
   }
 }
+
+variable "node_pools_cgroup_mode" {
+  type        = map(string)
+  description = "Map of strings containing cgroup node config by node-pool name; key \"all\" applies to every pool. Must be non-empty (e.g. CGROUP_MODE_UNSPECIFIED) when sysctls are set - TGM v36 coalesce() rejects empty strings"
+  default     = {}
+}
