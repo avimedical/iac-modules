@@ -45,4 +45,5 @@ module "gke" {
   node_pools_taints       = var.node_pools_taints
 
   node_pools_linux_node_configs_sysctls = var.node_pools_linux_node_configs_sysctls
+  node_pools_cgroup_mode                = var.node_pools_cgroup_mode
 }
