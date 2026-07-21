@@ -43,4 +43,6 @@ module "gke" {
   node_pools_metadata     = var.node_pools_metadata
   node_pools_tags         = var.node_pools_tags
   node_pools_taints       = var.node_pools_taints
+
+  node_pools_linux_node_configs_sysctls = var.node_pools_linux_node_configs_sysctls
 }
