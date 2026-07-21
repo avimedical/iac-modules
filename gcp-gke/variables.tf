@@ -149,3 +149,11 @@ variable "dns" {
     create_dns_record = false
   }
 }
+
+variable "node_pools_linux_node_configs_sysctls" {
+  type        = map(map(string))
+  description = "Map of maps containing linux node config sysctls by node-pool name; key \"all\" applies to every node pool"
+  default = {
+    all = {}
+  }
+}
