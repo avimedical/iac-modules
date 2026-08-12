@@ -27,6 +27,11 @@ resource "kubernetes_manifest" "postgresql_role" {
       "name" = local.username
     }
     "spec" = {
+      # Orphan, not the Delete default: removing this CR must NOT run DROP ROLE against a
+      # live instance. Crossplane provisioning here is being retired in favour of iac-sql;
+      # the underlying roles are dropped deliberately via SQL after verifying nothing
+      # connects with them.
+      "deletionPolicy" = "Orphan"
       "providerConfigRef" = {
         "name" = var.postgresql_provider_config
       }
@@ -54,6 +59,8 @@ resource "kubernetes_manifest" "postgresql_grant" {
       "name" = "${local.prefix}-grant"
     }
     "spec" = {
+      # See the Role above: Orphan so removing this CR does not REVOKE on a live instance.
+      "deletionPolicy" = "Orphan"
       "providerConfigRef" = {
         "name" = var.postgresql_provider_config
       }
