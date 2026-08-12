@@ -30,6 +30,11 @@ resource "kubernetes_manifest" "mysql_user" {
       "name" = local.username
     }
     "spec" = {
+      # Orphan, not the Delete default. Two reasons: removing this CR must not DROP USER on a
+      # live instance, and in prod these CRs target a decommissioned instance (10.129.8.4) —
+      # a Delete policy would block on the finalizer forever because the provider cannot
+      # reach the server to perform the deletion.
+      "deletionPolicy" = "Orphan"
       "providerConfigRef" = {
         "name" = var.mysql_provider_config
       }
@@ -62,6 +67,9 @@ resource "kubernetes_manifest" "mysql_grant" {
       "name" = "${local.prefix}-grant"
     }
     "spec" = {
+      # See the User above: Orphan so removal neither REVOKEs on a live instance nor hangs
+      # on a finalizer against the decommissioned prod instance.
+      "deletionPolicy" = "Orphan"
       "providerConfigRef" = {
         "name" = var.mysql_provider_config
       }
