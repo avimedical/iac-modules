@@ -1,4 +1,8 @@
 resource "google_service_account" "sa" {
+  # Explicit, not inherited from the provider's default project. Callers whose
+  # cluster lives outside the provider's project would otherwise create the SA
+  # in the wrong project while its IAM bindings below target var.project_id.
+  project      = var.project_id
   account_id   = var.sa_name
   display_name = var.sa_display_name
 }
