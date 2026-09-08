@@ -21,9 +21,12 @@ module "gke" {
   enable_private_nodes    = true
   # Dataplane V2 enforces NetworkPolicy itself; GKE rejects the Calico addon
   # alongside it. Unchanged (true) for every caller on the default datapath.
-  network_policy                    = var.datapath_provider != "ADVANCED_DATAPATH"
-  datapath_provider                 = var.datapath_provider
-  stack_type                        = var.stack_type
+  network_policy    = var.datapath_provider != "ADVANCED_DATAPATH"
+  datapath_provider = var.datapath_provider
+  stack_type        = var.stack_type
+  # GKE turns this on by itself on Dataplane V2, so leaving it unset makes every
+  # later plan want to replace the cluster -- the field is ForceNew.
+  enable_l4_ilb_subsetting          = var.enable_l4_ilb_subsetting
   horizontal_pod_autoscaling        = true
   service_account                   = "create"
   remove_default_node_pool          = var.remove_default_node_pool

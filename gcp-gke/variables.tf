@@ -185,3 +185,9 @@ variable "stack_type" {
     error_message = "stack_type must be IPV4 or IPV4_IPV6."
   }
 }
+
+variable "enable_l4_ilb_subsetting" {
+  type        = bool
+  description = "L4 internal load balancer subsetting. GKE enables it automatically on ADVANCED_DATAPATH clusters, so set it true there or Terraform reads the drift and plans a replacement -- the field is ForceNew. Default false matches the upstream module and every existing caller."
+  default     = false
+}
