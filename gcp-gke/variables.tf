@@ -163,3 +163,25 @@ variable "node_pools_cgroup_mode" {
   description = "Map of strings containing cgroup node config by node-pool name; key \"all\" applies to every pool. Must be non-empty (e.g. CGROUP_MODE_UNSPECIFIED) when sysctls are set - TGM v36 coalesce() rejects empty strings"
   default     = {}
 }
+
+variable "datapath_provider" {
+  type        = string
+  description = "Cluster datapath. ADVANCED_DATAPATH enables Dataplane V2, which is required for dual-stack and supersedes the Calico network-policy addon. Create-time only: GKE cannot migrate an existing cluster."
+  default     = "DATAPATH_PROVIDER_UNSPECIFIED"
+
+  validation {
+    condition     = contains(["DATAPATH_PROVIDER_UNSPECIFIED", "ADVANCED_DATAPATH", "LEGACY_DATAPATH"], var.datapath_provider)
+    error_message = "datapath_provider must be DATAPATH_PROVIDER_UNSPECIFIED, ADVANCED_DATAPATH or LEGACY_DATAPATH."
+  }
+}
+
+variable "stack_type" {
+  type        = string
+  description = "Cluster IP stack. IPV4_IPV6 needs ADVANCED_DATAPATH and a dual-stack subnet; GKE rejects it otherwise."
+  default     = "IPV4"
+
+  validation {
+    condition     = contains(["IPV4", "IPV4_IPV6"], var.stack_type)
+    error_message = "stack_type must be IPV4 or IPV4_IPV6."
+  }
+}

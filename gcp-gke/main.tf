@@ -17,9 +17,13 @@ module "gke" {
   //dedicated Secondary IP range for services
   ip_range_services = var.ip_range_services
 
-  enable_private_endpoint           = var.enable_private_endpoint
-  enable_private_nodes              = true
-  network_policy                    = true
+  enable_private_endpoint = var.enable_private_endpoint
+  enable_private_nodes    = true
+  # Dataplane V2 enforces NetworkPolicy itself; GKE rejects the Calico addon
+  # alongside it. Unchanged (true) for every caller on the default datapath.
+  network_policy                    = var.datapath_provider != "ADVANCED_DATAPATH"
+  datapath_provider                 = var.datapath_provider
+  stack_type                        = var.stack_type
   horizontal_pod_autoscaling        = true
   service_account                   = "create"
   remove_default_node_pool          = var.remove_default_node_pool
