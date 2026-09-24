@@ -35,6 +35,7 @@ module "gke" {
   deploy_using_private_endpoint     = var.deploy_using_private_endpoint
   enable_shielded_nodes             = true
   enable_vertical_pod_autoscaling   = var.enable_vertical_pod_autoscaling
+  gateway_api_channel               = var.gateway_api_channel
   config_connector                  = var.config_connector
   cluster_autoscaling               = var.cluster_autoscaling
   master_authorized_networks = [

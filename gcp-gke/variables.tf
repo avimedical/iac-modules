@@ -51,30 +51,30 @@ variable "database_encryption" {
 }
 variable "cluster_autoscaling" {
   type = object({
-    enabled       = bool
+    enabled             = bool
     autoscaling_profile = string
-    min_cpu_cores = number
-    max_cpu_cores = number
-    min_memory_gb = number
-    max_memory_gb = number
-    gpu_resources = list(object({ resource_type = string, minimum = number, maximum = number }))
-    auto_repair   = bool
-    auto_upgrade  = bool
-    disk_size     = optional(number)
-    disk_type     = optional(string)
+    min_cpu_cores       = number
+    max_cpu_cores       = number
+    min_memory_gb       = number
+    max_memory_gb       = number
+    gpu_resources       = list(object({ resource_type = string, minimum = number, maximum = number }))
+    auto_repair         = bool
+    auto_upgrade        = bool
+    disk_size           = optional(number)
+    disk_type           = optional(string)
   })
   default = {
-    enabled       = false
+    enabled             = false
     autoscaling_profile = "BALANCED"
-    max_cpu_cores = 0
-    min_cpu_cores = 0
-    max_memory_gb = 0
-    min_memory_gb = 0
-    gpu_resources = []
-    auto_repair   = true
-    auto_upgrade  = true
-    disk_size     = 100
-    disk_type     = "pd-standard"
+    max_cpu_cores       = 0
+    min_cpu_cores       = 0
+    max_memory_gb       = 0
+    min_memory_gb       = 0
+    gpu_resources       = []
+    auto_repair         = true
+    auto_upgrade        = true
+    disk_size           = 100
+    disk_type           = "pd-standard"
   }
   description = "Cluster autoscaling configuration. See [more details](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1beta1/projects.locations.clusters#clusterautoscaling)"
 }
@@ -190,4 +190,19 @@ variable "enable_l4_ilb_subsetting" {
   type        = bool
   description = "L4 internal load balancer subsetting. GKE enables it automatically on ADVANCED_DATAPATH clusters, so set it true there or Terraform reads the drift and plans a replacement -- the field is ForceNew. Default false matches the upstream module and every existing caller."
   default     = false
+}
+
+variable "gateway_api_channel" {
+  type        = string
+  description = <<-EOT
+    GKE Gateway controller channel: CHANNEL_STANDARD or CHANNEL_DISABLED. null leaves the addon
+    untouched. GKE offers no experimental channel, so a cluster that also runs a self-managed
+    Gateway API install cannot have both sets of CRDs.
+  EOT
+  default     = null
+
+  validation {
+    condition     = var.gateway_api_channel == null || contains(["CHANNEL_STANDARD", "CHANNEL_DISABLED"], coalesce(var.gateway_api_channel, "null"))
+    error_message = "gateway_api_channel must be CHANNEL_STANDARD, CHANNEL_DISABLED or null."
+  }
 }
