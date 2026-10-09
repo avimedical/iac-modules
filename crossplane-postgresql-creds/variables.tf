@@ -1,16 +1,19 @@
 variable "cluster_ca_certificate" {
   description = "The public certificate that is the root of trust for the cluster."
   type        = string
+  default     = null # unused by this module; removed once callers stop passing it
 }
 
 variable "host" {
   description = "The server to connect to (the Kubernetes master endpoint)."
   type        = string
+  default     = null # unused by this module; removed once callers stop passing it
 }
 
 variable "token" {
   description = "The token to authenticate with the Kubernetes master."
   type        = string
+  default     = null # unused by this module; removed once callers stop passing it
 }
 
 variable "database" {
