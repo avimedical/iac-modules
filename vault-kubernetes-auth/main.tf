@@ -93,6 +93,24 @@ resource "vault_kubernetes_auth_backend_config" "kubernetes" {
   disable_iss_validation = true
 }
 
+locals {
+  # Everything under avimedical/ and infrastructure/ is shared, except the other
+  # environments' keys: top-level (prod/...) and up to two levels down
+  # (tailscale/prod). In Vault the pattern whose first wildcard comes later wins,
+  # so all of these beat "avimedical/*".
+  other_environments = [for e in ["dev", "stg", "prod"] : e if e != var.environment]
+  denied_paths = flatten([
+    for e in local.other_environments : [
+      for m in ["avimedical", "infrastructure"] : [
+        for t in ["data", "metadata", "subkeys"] : [
+          for pre in ["", "+/", "+/+/"] : ["${m}/${t}/${pre}${e}", "${m}/${t}/${pre}${e}/*"]
+        ]
+      ]
+    ]
+  ])
+  deny_rules = join("", [for p in local.denied_paths : "path \"${p}\" {\n  capabilities = [\"deny\"]\n}\n"])
+}
+
 resource "vault_policy" "kubernetes" {
   name   = "kubernetes-${var.environment}-${var.domain}-${var.namespace}-policy"
   policy = <<-EOT
@@ -102,6 +120,7 @@ resource "vault_policy" "kubernetes" {
   path "infrastructure/*" {
     capabilities = ["read", "list"]
   }
+  ${local.deny_rules}
   EOT
 }
 
