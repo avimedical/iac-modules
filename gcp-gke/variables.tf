@@ -206,3 +206,18 @@ variable "gateway_api_channel" {
     error_message = "gateway_api_channel must be CHANNEL_STANDARD, CHANNEL_DISABLED or null."
   }
 }
+
+variable "master_authorized_networks" {
+  type = list(object({
+    cidr_block   = string
+    display_name = string
+  }))
+  description = "CIDRs allowed on the IP endpoints. null keeps the old default 0.0.0.0/0."
+  default     = null
+}
+
+variable "dns_allow_external_traffic" {
+  type        = bool
+  description = "Allow the DNS-based control plane endpoint from outside Google Cloud (IAM-checked: container.clusters.connect). null leaves it untouched."
+  default     = null
+}
