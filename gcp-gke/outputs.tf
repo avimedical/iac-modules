@@ -89,3 +89,8 @@ output "service_account" {
   description = "The service account to default running nodes as if not overridden in `node_pools`."
   value       = module.gke.service_account
 }
+
+output "endpoint_dns" {
+  description = "DNS-based control plane endpoint (hostname, no scheme)"
+  value       = module.gke.endpoint_dns
+}

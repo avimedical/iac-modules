@@ -38,12 +38,14 @@ module "gke" {
   gateway_api_channel               = var.gateway_api_channel
   config_connector                  = var.config_connector
   cluster_autoscaling               = var.cluster_autoscaling
-  master_authorized_networks = [
+  # Applies to the public IP endpoint (and the private one; nodes and Pods are always allowed).
+  master_authorized_networks = var.master_authorized_networks != null ? var.master_authorized_networks : [
     {
       cidr_block   = "0.0.0.0/0"
       display_name = "${var.cluster_name}-vpc"
     },
   ]
+  dns_allow_external_traffic = var.dns_allow_external_traffic
 
   node_pools              = var.node_pools_config
   node_pools_oauth_scopes = var.node_pools_oauth_scopes
