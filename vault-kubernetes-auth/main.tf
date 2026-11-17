@@ -25,7 +25,20 @@ locals {
       ]
     ]
   ])
-  deny_rules = join("", [for p in local.denied_paths : "path \"${p}\" {\n  capabilities = [\"deny\"]\n}\n"])
+  # Secrets that belong to one namespace only, although they sit under the shared
+  # avimedical/ mount: the LLM gateway's program keys and provider keys. Every
+  # other namespace is denied them. "avimedical/data/+/+/llm-gateway" has its
+  # first wildcard later than "avimedical/*", so the deny wins.
+  private_secrets = {
+    "llm-gateway"           = "llm-gateway"
+    "llm-gateway-providers" = "llm-gateway"
+  }
+  private_paths = flatten([
+    for name, owner in local.private_secrets : [
+      for t in ["data", "metadata", "subkeys"] : "avimedical/${t}/+/+/${name}"
+    ] if owner != var.namespace
+  ])
+  deny_rules = join("", [for p in concat(local.denied_paths, local.private_paths) : "path \"${p}\" {\n  capabilities = [\"deny\"]\n}\n"])
 }
 
 resource "vault_policy" "kubernetes" {
