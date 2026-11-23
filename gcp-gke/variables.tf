@@ -221,3 +221,15 @@ variable "dns_allow_external_traffic" {
   description = "Allow the DNS-based control plane endpoint from outside Google Cloud (IAM-checked: container.clusters.connect). null leaves it untouched."
   default     = null
 }
+
+variable "cluster_dns_provider" {
+  type        = string
+  description = "In-cluster DNS: PROVIDER_UNSPECIFIED (kube-dns, default) or CLOUD_DNS. CLOUD_DNS is needed to bind Cloud DNS response policies to the cluster."
+  default     = "PROVIDER_UNSPECIFIED"
+}
+
+variable "cluster_dns_scope" {
+  type        = string
+  description = "Scope of the cluster's DNS records with CLOUD_DNS: DNS_SCOPE_UNSPECIFIED (default) or CLUSTER_SCOPE."
+  default     = "DNS_SCOPE_UNSPECIFIED"
+}
