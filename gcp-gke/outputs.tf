@@ -94,3 +94,8 @@ output "endpoint_dns" {
   description = "DNS-based control plane endpoint (hostname, no scheme)"
   value       = module.gke.endpoint_dns
 }
+
+output "cluster_id" {
+  description = "Cluster ID (projects/<project>/locations/<location>/clusters/<name>)"
+  value       = module.gke.cluster_id
+}

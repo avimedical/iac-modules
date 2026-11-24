@@ -46,6 +46,10 @@ module "gke" {
     },
   ]
   dns_allow_external_traffic = var.dns_allow_external_traffic
+  # In-cluster DNS. Defaults keep kube-dns and send no dns_config at all.
+  # Existing nodes only switch after their node pool is upgraded (recreated).
+  cluster_dns_provider = var.cluster_dns_provider
+  cluster_dns_scope    = var.cluster_dns_scope
 
   node_pools              = var.node_pools_config
   node_pools_oauth_scopes = var.node_pools_oauth_scopes
